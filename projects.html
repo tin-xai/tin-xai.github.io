@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feature Projects - Thanh-Tin Nguyen</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <style>
+        /* Navigation Button Styles */
+        nav a {
+            background-color: #4CAF50; /* Green background */
+            border: none;
+            color: white; /* White text */
+            padding: 14px 28px; /* Top and bottom padding, Left and right padding */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px; /* Margin between buttons */
+            cursor: pointer;
+            border-radius: 8px; /* Rounded corners */
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+        }
+
+        nav a:hover {
+            background-color: #45a049; /* Darker shade of green */
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Shadow effect on hover */
+        }
+
+        /* Project Styles */
+        .project {
+            background-color: #f9f9f9; /* Light grey background */
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+            display: flex;
+            align-items: center;
+        }
+        .project-image {
+            flex: 0 0 190px; /* Do not grow or shrink, fixed width */
+            margin-right: 20px; /* Space between image and text */
+        }
+        .project-image img {
+            width: 100%; /* Full width of the container */
+            height: auto;
+            border-radius: 5px; /* Rounded corners for images */
+        }
+        .project-content {
+            flex: 1; /* Take up remaining space */
+        }
+        .project-content h2 {
+            margin-top: 0; /* Remove margin top */
+        }
+        .project-content p {
+            margin-bottom: 0.5em; /* Space between paragraphs */
+        }
+        .project-content a {
+            color: #4CAF50; /* Green text for links */
+        }
+        .project-content a, .project-content img {
+            vertical-align: middle; /* Aligns the link and the badge vertically */
+            margin-right: 5px; /* Consistent spacing */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="presentations.html">Presentations</a>
+            <a href="projects.html">Feature Projects</a>
+            <a href="news.html">Latest News</a>
+            <!-- Add other navigation links as needed -->
+        </nav>
+    </header>
+    <main>
+        <h1>Featured Projects</h1>
+
+        <div class="project">
+            <div class="project-image">
+                <img src='images/owlvit_box.jpg' alt="OWL-ViT + Segment Anything">
+            </div>
+            <div class="project-content">
+                <h2>OWL-ViT + Segment Anything</h2> 
+                <p>Combining OwlViT with Segment Anything - Open-vocabulary Detection and Segmentation (Text-conditioned, and Image-conditioned).</p>  
+                <a href="#">Project Page</a> /
+                <a href="https://github.com/ngthanhtin/owlvit_segment_anything">Code</a>
+                <a href="https://github.com/ngthanhtin/owlvit_segment_anything/stargazers"><img src="https://img.shields.io/github/stars/ngthanhtin/owlvit_segment_anything?style=social" alt="GitHub stars"></a> 
+            </div>
+        </div>
+    
+        <div class="project">
+            <div class="project-image">
+                <img src='images/mot.gif' alt="Multiple Object Tracking">
+            </div>
+            <div class="project-content">
+                <h2>Multiple Object Tracking by Kalman Filter and Hungary Matching</h2> 
+                <p>Implemented by C++. Project using Background Subtraction Method, Kalman Filter, and Hungary Algorithm.</p>  
+                <a href="https://ngthanhtin.github.io/blog/tracking/2021-02-04-multiple-object-tracking-with-kalman-filter/">Project Page</a> /
+                <a href="https://github.com/ngthanhtin/Muiltiple-Object-Tracking">Code</a>
+                <a href="https://github.com/ngthanhtin/Muiltiple-Object-Tracking/stargazers"><img src="https://img.shields.io/github/stars/ngthanhtin/Muiltiple-Object-Tracking?style=social" alt="GitHub stars"></a>
+            </div>
+        </div>
+
+         <div class="project">
+            <div class="project-image">
+                <img src='images/ma_il.gif' alt="Multi-Agent Navigation">
+            </div>
+            <div class="project-content">
+                <h2>Multi-Agent for Instruction Following Navigation</h2>
+                <p>Multi-Agent (2 robots) for Instruction Following Navigation task.</p>
+                <a href="https://ngthanhtin.github.io/blog/">Project Page</a> /
+                <a href="https://github.com/ngthanhtin/Instruction-Navigation-MultiRobot">Code</a>
+                <a href="https://github.com/ngthanhtin/Instruction-Navigation-MultiRobot/stargazers"><img src="https://img.shields.io/github/stars/ngthanhtin/Instruction-Navigation-MultiRobot?style=social" alt="GitHub stars"></a>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-image">
+                <img src='images/automate_research.jpeg' alt="Automate Research">
+            </div>
+            <div class="project-content">
+                <h2>Automate Research</h2>
+                <p>Keep important commands or tools for automating research.</p>
+                <a href="https://github.com/ngthanhtin/Automate_Research">Code</a>
+            </div>
+        </div>
+        
+
+    </main>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+</body>
+</html>

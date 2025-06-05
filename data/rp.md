@@ -1,0 +1,3 @@
+## Research Purpose Statement
+
+This project aims to deepen our understanding of how vision–language models (VLMs) represent and manipulate concepts internally, with two main focuses: explainability and embedding‐based editing. First, we will develop methods to visualize and interpret hidden‐state representations, shedding light on how models encode object attributes, colors, and other semantic features. Second, we will explore techniques to edit these representations—adding or removing specific object or attribute embeddings—to control model outputs and reduce hallucination. By unifying explainability with controllable embedding manipulation, our research seeks to make VLMs more transparent and reliable for real‐world applications.
