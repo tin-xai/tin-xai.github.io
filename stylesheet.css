@@ -129,3 +129,103 @@ name {
 span.highlight {
   background-color: #ffffd0;
 }
+
+/* Additional styles from index.html */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.profile {
+    background-color: #fff;
+    padding: 20px;
+    margin: auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center; /* Center align text for a more friendly appearance */
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* Assign unique colors to different icons */
+.fa-user-graduate { color: #1E90FF; } /* Dodger blue for academic achievements */
+.fa-handshake { color: #28A745; } /* Green for collaboration, signaling go-ahead */
+.fa-envelope { color: #FFC107; } /* Amber for communication, inviting contacts */
+.fa-smile-beam { color: #FFD700; } /* Gold color for a warm, friendly vibe */
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Paper entry styles */
+.paper-row {
+    padding: 0px;
+}
+
+.paper-image-cell {
+    padding: 20px;
+    width: 25%;
+    vertical-align: middle;
+}
+
+.paper-content-cell {
+    padding: 20px;
+    width: 75%;
+    vertical-align: middle;
+}
+
+/* Table container styles */
+.container-table {
+    width: 100%;
+    max-width: 800px;
+    border: 0px;
+    border-spacing: 0px;
+    border-collapse: separate;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.full-width-table {
+    width: 100%;
+    border: 0px;
+    border-spacing: 0px;
+    border-collapse: separate;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Profile section styles */
+.profile-content {
+    padding: 2.5%;
+    width: 63%;
+    vertical-align: middle;
+}
+
+.profile-image {
+    padding: 2.5%;
+    width: 40%;
+    max-width: 40%;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.full-width-cell {
+    padding: 20px;
+    width: 100%;
+    vertical-align: middle;
+}
