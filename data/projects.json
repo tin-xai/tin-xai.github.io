@@ -8,7 +8,6 @@
             "NLP",
             "Explainability"
         ],
-        "icon": "🔍",
         "links": {
             "github": "https://github.com/anguyen8/hot",
             "website": "https://highlightedchainofthought.github.io/",
@@ -16,35 +15,15 @@
         }
     },
     {
-        "slug": "peeb",
-        "title": "PEEB: Explainable & Editable Language Bottleneck",
-        "description": "Part-based image classifiers with an explainable and editable language bottleneck for fine-grained recognition.",
+        "slug": "argue.ai",
+        "title": "Argue.ai: Mutli-LLM Debate",
+        "description": "Let 2 LLMs talk to each other to brainstorm and generate better solutions.",
         "tags": [
-            "Python",
-            "Vision",
-            "XAI"
+            "Multi-Agent",
+            "LLM"
         ],
-        "icon": "🧩",
         "links": {
-            "github": "https://github.com/anguyen8/peeb",
-            "paper": "https://arxiv.org/pdf/2403.05297.pdf",
-            "demo": "https://huggingface.co/spaces/XAI/PEEB"
-        }
-    },
-    {
-        "slug": "vizdoom-vln",
-        "title": "Coarse-To-Fine Fusion for 3D Navigation",
-        "description": "Language grounding in 3D environments using attention-based coarse-to-fine fusion for VizDoom navigation.",
-        "tags": [
-            "Python",
-            "RL",
-            "3D"
-        ],
-        "icon": "🎮",
-        "links": {
-            "github": "https://github.com/tin-xai/AE_VLN_Vizdoom",
-            "paper": "https://www.sciencedirect.com/science/article/pii/S095070512300535X",
-            "video": "https://youtu.be/rwODCJFM1SY"
+            "github": "https://github.com/tin-xai/Argue.ai"
         }
     }
 ]
