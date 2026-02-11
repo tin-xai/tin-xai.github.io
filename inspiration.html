@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration — Tin Nguyen</title>
+    <meta name="description" content="Posts, researchers, and websites that inspire me — curated by Tin Nguyen.">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/aboutme/seal_icon.png">
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- Nav back -->
+        <nav class="blog-nav">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </nav>
+
+        <header class="blog-header">
+            <h1 class="blog-page-title">Inspiration Board 💡</h1>
+            <p class="blog-page-subtitle">Posts I bookmarked, people I learn from, and websites I admire.</p>
+        </header>
+
+        <!-- Tab navigation -->
+        <div class="inspo-tabs">
+            <button class="inspo-tab active" data-tab="posts">
+                <i class="fas fa-bookmark"></i> Posts I Like
+            </button>
+            <button class="inspo-tab" data-tab="researchers">
+                <i class="fas fa-user-graduate"></i> Voices I Follow
+            </button>
+            <button class="inspo-tab" data-tab="cvs">
+                <i class="fas fa-palette"></i> Cool Websites
+            </button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="tab-posts" class="inspo-panel active"></div>
+        <div id="tab-researchers" class="inspo-panel"></div>
+        <div id="tab-cvs" class="inspo-panel"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.inspo-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.inspo-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.inspo-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        const platformIcons = {
+            x: '<i class="fab fa-x-twitter"></i>',
+            linkedin: '<i class="fab fa-linkedin"></i>',
+            substack: '<i class="fas fa-rss"></i>',
+            other: '<i class="fas fa-link"></i>'
+        };
+
+        fetch('data/inspiration.json')
+            .then(res => res.json())
+            .then(data => {
+                // Posts I Like
+                const postsEl = document.getElementById('tab-posts');
+                if (data.posts && data.posts.length) {
+                    postsEl.innerHTML = data.posts.map(p => {
+                        const icon = platformIcons[p.platform] || platformIcons.other;
+                        const tags = p.tags ? p.tags.map(t => `<span class="blog-tag">${t}</span>`).join('') : '';
+                        return `
+                            <a href="${p.url}" class="inspo-card" target="_blank" rel="noopener">
+                                <div class="inspo-icon">${icon}</div>
+                                <div class="inspo-body">
+                                    <div class="inspo-author">${p.author} <span class="inspo-handle">${p.handle}</span></div>
+                                    <p class="inspo-excerpt">${p.excerpt}</p>
+                                    <div class="blog-card-tags">${tags}</div>
+                                </div>
+                            </a>`;
+                    }).join('');
+                } else {
+                    postsEl.innerHTML = '<p class="inspo-empty">Nothing saved yet — stay tuned! 📌</p>';
+                }
+
+                // Voices I Follow
+                const researchersEl = document.getElementById('tab-researchers');
+                if (data.researchers && data.researchers.length) {
+                    researchersEl.innerHTML = data.researchers.map(r => `
+                        <a href="${r.url}" class="inspo-card" target="_blank" rel="noopener">
+                            <div class="inspo-icon"><i class="fas fa-user-astronaut"></i></div>
+                            <div class="inspo-body">
+                                <div class="inspo-author">${r.name} <span class="inspo-handle">${r.role}</span></div>
+                                <p class="inspo-excerpt">${r.why}</p>
+                            </div>
+                        </a>`).join('');
+                } else {
+                    researchersEl.innerHTML = '<p class="inspo-empty">Coming soon! 🧠</p>';
+                }
+
+                // Cool CVs / Websites
+                const cvsEl = document.getElementById('tab-cvs');
+                if (data.cvs && data.cvs.length) {
+                    cvsEl.innerHTML = data.cvs.map(c => `
+                        <a href="${c.url}" class="inspo-card" target="_blank" rel="noopener">
+                            <div class="inspo-icon"><i class="fas fa-globe"></i></div>
+                            <div class="inspo-body">
+                                <div class="inspo-author">${c.name} <span class="inspo-handle">${c.role}</span></div>
+                                <p class="inspo-excerpt">${c.why}</p>
+                            </div>
+                        </a>`).join('');
+                } else {
+                    cvsEl.innerHTML = '<p class="inspo-empty">Coming soon! 🎨</p>';
+                }
+            })
+            .catch(err => console.error('Failed to load inspiration data:', err));
+    </script>
+</body>
+
+</html>

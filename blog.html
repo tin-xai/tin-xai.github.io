@@ -25,68 +25,53 @@
             <p class="blog-page-subtitle">Stories, moments, and adventures beyond the lab.</p>
         </header>
 
-        <!-- Blog listing -->
-        <div class="blog-list">
-
-            <!-- Post 1 -->
-            <a href="blog/first-soccer-tournament.html" class="blog-card">
-                <div class="blog-card-date">
-                    <span class="blog-month">Feb</span>
-                    <span class="blog-day">10</span>
-                    <span class="blog-year">2026</span>
-                </div>
-                <div class="blog-card-body">
-                    <h2 class="blog-card-title">First Soccer Tournament at Auburn ⚽</h2>
-                    <p class="blog-card-excerpt">Our lab team entered the intramural soccer tournament — we didn't win,
-                        but the team spirit was unreal. Here's what happened...</p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Soccer</span>
-                        <span class="blog-tag">Auburn Life</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Post 2 -->
-            <a href="blog/guitar-first-song.html" class="blog-card">
-                <div class="blog-card-date">
-                    <span class="blog-month">Jan</span>
-                    <span class="blog-day">25</span>
-                    <span class="blog-year">2026</span>
-                </div>
-                <div class="blog-card-body">
-                    <h2 class="blog-card-title">Finally Learned My First Full Song 🎸</h2>
-                    <p class="blog-card-excerpt">After months of practice, I can finally play "Hotel California" from
-                        start to finish. The journey from zero to this moment...</p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Guitar</span>
-                        <span class="blog-tag">Music</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Post 3 -->
-            <a href="blog/badminton-weekend.html" class="blog-card">
-                <div class="blog-card-date">
-                    <span class="blog-month">Jan</span>
-                    <span class="blog-day">12</span>
-                    <span class="blog-year">2026</span>
-                </div>
-                <div class="blog-card-body">
-                    <h2 class="blog-card-title">Weekend Badminton with the Vietnamese Community 🏸</h2>
-                    <p class="blog-card-excerpt">Every Saturday morning, a group of us gather at the rec center for some
-                        fierce badminton. It's become my favorite weekly ritual...</p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Badminton</span>
-                        <span class="blog-tag">Community</span>
-                    </div>
-                </div>
-            </a>
-
-        </div>
+        <!-- Blog listing — rendered dynamically from blog/posts.json -->
+        <div id="blog-list" class="blog-list"></div>
 
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Format date string to display parts
+        function formatDate(isoDate) {
+            const d = new Date(isoDate + 'T00:00:00');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return {
+                month: months[d.getMonth()],
+                day: d.getDate(),
+                year: d.getFullYear()
+            };
+        }
+
+        // Render a single blog card
+        function renderBlogCard(post, basePath) {
+            const date = formatDate(post.date);
+            const tags = post.tags.map(t => `<span class="blog-tag">${t}</span>`).join('');
+            return `
+                <a href="${basePath}blog/${post.slug}.html" class="blog-card">
+                    <div class="blog-card-date">
+                        <span class="blog-month">${date.month}</span>
+                        <span class="blog-day">${date.day}</span>
+                        <span class="blog-year">${date.year}</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h2 class="blog-card-title">${post.title}</h2>
+                        <p class="blog-card-excerpt">${post.excerpt}</p>
+                        <div class="blog-card-tags">${tags}</div>
+                    </div>
+                </a>`;
+        }
+
+        // Fetch posts and render
+        fetch('blog/posts.json')
+            .then(res => res.json())
+            .then(posts => {
+                const container = document.getElementById('blog-list');
+                container.innerHTML = posts.map(p => renderBlogCard(p, '')).join('');
+            })
+            .catch(err => console.error('Failed to load blog posts:', err));
+    </script>
 </body>
 
 </html>

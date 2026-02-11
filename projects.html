@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Tin Nguyen</title>
+    <meta name="description" content="Open-source projects and tools by Tin Nguyen — AI, NLP, and XAI.">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/aboutme/seal_icon.png">
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- Nav back -->
+        <nav class="blog-nav">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </nav>
+
+        <header class="blog-header">
+            <h1 class="blog-page-title">Projects 🚀</h1>
+            <p class="blog-page-subtitle">Open-source tools, research code, and things I've built.</p>
+        </header>
+
+        <!-- Projects grid — rendered from data/projects.json -->
+        <div id="projects-grid" class="projects-grid"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const linkIcons = {
+            github: '<i class="fab fa-github"></i>',
+            website: '<i class="fas fa-globe"></i>',
+            paper: '<i class="fas fa-file-alt"></i>',
+            demo: '<i class="fas fa-play-circle"></i>',
+            video: '<i class="fab fa-youtube"></i>',
+            slides: '<i class="fas fa-presentation"></i>'
+        };
+
+        const linkLabels = {
+            github: 'Code',
+            website: 'Website',
+            paper: 'Paper',
+            demo: 'Demo',
+            video: 'Video',
+            slides: 'Slides'
+        };
+
+        fetch('data/projects.json')
+            .then(res => res.json())
+            .then(projects => {
+                const grid = document.getElementById('projects-grid');
+                grid.innerHTML = projects.map(p => {
+                    const tags = p.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
+                    const links = Object.entries(p.links).map(([type, url]) =>
+                        `<a href="${url}" class="project-link" target="_blank" rel="noopener">
+                            ${linkIcons[type] || '<i class="fas fa-link"></i>'}
+                            ${linkLabels[type] || type}
+                        </a>`
+                    ).join('');
+                    return `
+                        <div class="project-card">
+                            <div class="project-icon">${p.icon}</div>
+                            <div class="project-content">
+                                <h2 class="project-title">${p.title}</h2>
+                                <p class="project-desc">${p.description}</p>
+                                <div class="project-tags">${tags}</div>
+                                <div class="project-links">${links}</div>
+                            </div>
+                        </div>`;
+                }).join('');
+            })
+            .catch(err => console.error('Failed to load projects:', err));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "first-soccer-tournament",
+    "title": "First Soccer Tournament at Auburn ⚽",
+    "excerpt": "Our lab team entered the intramural soccer tournament — we didn't win, but the team spirit was unreal. Here's what happened...",
+    "date": "2026-02-10",
+    "tags": [
+      "Soccer",
+      "Auburn Life"
+    ],
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "guitar-first-song",
+    "title": "Finally Learned My First Full Song 🎸",
+    "excerpt": "After months of practice, I can finally play \"Hotel California\" from start to finish. The journey from zero to this moment...",
+    "date": "2026-01-25",
+    "tags": [
+      "Guitar",
+      "Music"
+    ],
+    "readingTime": "3 min read"
+  },
+  {
+    "slug": "badminton-weekend",
+    "title": "Weekend Badminton with the Vietnamese Community 🏸",
+    "excerpt": "Every Saturday morning, a group of us gather at the rec center for some fierce badminton. It's become my favorite weekly ritual...",
+    "date": "2026-01-12",
+    "tags": [
+      "Badminton",
+      "Community"
+    ],
+    "readingTime": "3 min read"
+  }
+]

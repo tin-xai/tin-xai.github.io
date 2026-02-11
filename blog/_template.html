@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} — Tin Nguyen</title>
+    <meta name="description" content="{{EXCERPT}}">
+    <link rel="stylesheet" href="../stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="../images/seal_icon.png">
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- Nav back -->
+        <nav class="blog-nav">
+            <a href="../blog.html" class="back-link"><i class="fas fa-arrow-left"></i> All Posts</a>
+            <a href="../index.html" class="back-link"><i class="fas fa-home"></i> Home</a>
+        </nav>
+
+        <article class="blog-post">
+            <header class="post-header">
+                <div class="post-meta">
+                    <time datetime="{{DATE_ISO}}">{{DATE_DISPLAY}}</time>
+                    <span class="post-reading-time">{{READING_TIME}}</span>
+                </div>
+                <h1 class="post-title">{{TITLE}}</h1>
+                <div class="blog-card-tags">
+                    {{TAGS}}
+                </div>
+            </header>
+
+            <div class="post-body">
+                <!-- Write your post content here -->
+                <p>
+                    Your content goes here...
+                </p>
+            </div>
+        </article>
+
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

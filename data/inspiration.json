@@ -1,0 +1,60 @@
+{
+    "posts": [
+        {
+            "author": "Andrej Karpathy",
+            "handle": "@karpathy",
+            "platform": "x",
+            "url": "https://x.com/karpathy",
+            "excerpt": "Follow for deep insights on AI, LLMs, and building software 2.0.",
+            "tags": [
+                "AI",
+                "Deep Learning"
+            ]
+        },
+        {
+            "author": "Yann LeCun",
+            "handle": "@ylecun",
+            "platform": "x",
+            "url": "https://x.com/ylecun",
+            "excerpt": "Chief AI Scientist at Meta. Thoughts on world models, self-supervised learning, and the future of AI.",
+            "tags": [
+                "AI",
+                "Research"
+            ]
+        }
+    ],
+    "researchers": [
+        {
+            "name": "Andrej Karpathy",
+            "role": "Ex-OpenAI, Ex-Tesla AI Director",
+            "url": "https://karpathy.ai/",
+            "why": "Incredible educator — his neural net lectures changed how I think about deep learning."
+        },
+        {
+            "name": "Anh Nguyen",
+            "role": "Associate Professor, Auburn University",
+            "url": "https://anhnguyen.me/",
+            "why": "My advisor — building interpretable AI systems that humans can trust."
+        },
+        {
+            "name": "Lilian Weng",
+            "role": "Head of Safety Systems, OpenAI",
+            "url": "https://lilianweng.github.io/",
+            "why": "Her blog posts are the gold standard for understanding ML topics."
+        }
+    ],
+    "cvs": [
+        {
+            "name": "Jon Barron",
+            "role": "Senior Research Scientist, Google",
+            "url": "https://jonbarron.info/",
+            "why": "Clean, minimal academic page — the blueprint for researcher websites."
+        },
+        {
+            "name": "Thaoshibe",
+            "role": "PhD in Computer Vision",
+            "url": "https://thaoshibe.github.io/",
+            "why": "Beautiful modern design that inspired this very website."
+        }
+    ]
+}
