@@ -12,14 +12,23 @@
             ]
         },
         {
-            "author": "Yann LeCun",
-            "handle": "@ylecun",
+            "author": "Sakana AI",
+            "handle": "@sakana_ai",
             "platform": "x",
-            "url": "https://x.com/ylecun",
-            "excerpt": "Chief AI Scientist at Meta. Thoughts on world models, self-supervised learning, and the future of AI.",
+            "url": "https://pub.sakana.ai/Unofficial_Guide/",
+            "excerpt": "The Unofficial Guide to AI Research",
             "tags": [
-                "AI",
-                "Research"
+                "Interview"
+            ]
+        },
+        {
+            "author": "",
+            "handle": "@",
+            "platform": "x",
+            "url": "https://www.reddit.com/r/internships/comments/1r0nk5p/how_to_get_an_internship_in_2026_everything_i_am/?%24deep_link=true&correlation_id=2f08a834-b8e7-4a1e-8fad-c9a14cceab2b&post_fullname=t3_1r0nk5p&post_index=0&ref=email_digest&ref_campaign=email_digest&ref_source=email&target_user=Legitimate-Case-3530&utm_content=post_title&%243p=e_as&_branch_match_id=1549774587758343207&utm_medium=Email%20Amazon%20SES&_branch_referrer=H4sIAAAAAAAAA21Qy07DMBD8mvSWNrXTEpAqhICe%2BAdrY28Sq45tbTYELnw7G8rjgmRLo5md2cfAnKe73Y7QOc9byHkbfLzsdL4vVK3zCQ1MG4GJfO8jBDNTOA2rq9APhTrLW5Zl%2B%2B23aRSC5PvISHEavBSqs%2FAjRl7hnqp4OWRBQ1oMJ9MjG4jmzyDQqEodDb4ivfPgY2%2B8gTW50NLwoGqHmM06aKGfmGYs1NEmIgzAPkmWE151VQONrsu2wZuyhj2WTQeutLewr61FaFUrvpwmNt0cQoQR1zhtfke8ij46fBOlEoKwE4Qj%2BGCc73HiK2ksjBl8H%2F9XpzSTxR9NSAZa954nJGFfsPfsR2AsH2HCUh%2F02mzm0dgkd4ksRV%2BzsOeAmw%2FJRKL1MC2lRUJOz67HT5eF3MPNAQAA",
+            "excerpt": "How to Get an Internship in 2026 (Everything I Am Doing) 🎓",
+            "tags": [
+                "Internship"
             ]
         }
     ],
@@ -31,29 +40,29 @@
             "why": "Incredible educator — his neural net lectures changed how I think about deep learning."
         },
         {
-            "name": "Anh Nguyen",
-            "role": "Associate Professor, Auburn University",
-            "url": "https://anhnguyen.me/",
-            "why": "My advisor — building interpretable AI systems that humans can trust."
+            "name": "Simon Willison",
+            "role": "AI Researcher & Developer",
+            "url": "https://simonwillison.net/",
+            "why": "His blog posts are the gold standard for understanding ML topics."
         },
         {
-            "name": "Lilian Weng",
-            "role": "Head of Safety Systems, OpenAI",
-            "url": "https://lilianweng.github.io/",
-            "why": "Her blog posts are the gold standard for understanding ML topics."
+            "name": "Calvin French-Owen",
+            "role": "-",
+            "url": "https://calv.info/bitrate",
+            "why": "His blog posts are the gold standard for understanding ML topics."
         }
     ],
     "cvs": [
         {
-            "name": "Jon Barron",
-            "role": "Senior Research Scientist, Google",
-            "url": "https://jonbarron.info/",
+            "name": "Victor Dibia",
+            "role": "Expert in Applied Machine Learning and HCI @ Microsoft",
+            "url": "https://victordibia.com/",
             "why": "Clean, minimal academic page — the blueprint for researcher websites."
         },
         {
-            "name": "Thaoshibe",
-            "role": "PhD in Computer Vision",
-            "url": "https://thaoshibe.github.io/",
+            "name": "Hyeonjeong Ha",
+            "role": "PhD in UIUC",
+            "url": "https://hyeonjeongha.github.io/",
             "why": "Beautiful modern design that inspired this very website."
         }
     ]
