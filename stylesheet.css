@@ -811,12 +811,14 @@ a:focus {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 24px 22px;
-  border-radius: var(--radius-lg);
+  padding: 20px 18px;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  color: #fff;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .explore-card::before {
@@ -829,39 +831,14 @@ a:focus {
 }
 
 .explore-card:hover {
-  transform: translateY(-4px);
-  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .explore-card:hover::before {
-  opacity: 1;
-}
-
-.explore-card--projects {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.explore-card--projects::before {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
-}
-
-.explore-card--inspiration {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.explore-card--inspiration::before {
-  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-  box-shadow: 0 8px 32px rgba(245, 87, 108, 0.4);
-}
-
-.explore-card--wins {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.explore-card--wins::before {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  box-shadow: 0 8px 32px rgba(79, 172, 254, 0.4);
+  opacity: 0;
 }
 
 .explore-emoji {
@@ -892,6 +869,21 @@ a:focus {
   position: relative;
   z-index: 1;
   flex: 1;
+}
+
+.explore-thumb {
+  width: 100%;
+  max-height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
+.explore-card:hover .explore-thumb {
+  opacity: 1;
 }
 
 .explore-arrow {
