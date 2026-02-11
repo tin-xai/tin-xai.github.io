@@ -1,11 +1,11 @@
 [
   {
     "slug": "none",
-    "title": "I have been awarded one of the December 2025 GSC Travel Fellowships to assist with your conference travel and attendance costs.",
-    "excerpt": "Received $400 travel grant from Auburn University Graduate School.",
+    "title": "I have been awarded $400 travel grant from Auburn University Graduate School.",
+    "excerpt": "",
     "date": "2026-01-27",
     "tags": [
-      "scholarship"
+      "Scholarship"
     ]
   },
   {
@@ -29,5 +29,14 @@
       "Community"
     ],
     "readingTime": "3 min read"
+  },
+  {
+    "slug": "none",
+    "title": "I have been awarded $150 in free credits from Tinker AI",
+    "excerpt": "",
+    "date": "2025-11-7",
+    "tags": [
+      "Tinker AI"
+    ]
   }
 ]
