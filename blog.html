@@ -46,10 +46,13 @@
 
         // Render a single blog card
         function renderBlogCard(post, basePath) {
+            const date = formatDate(post.date);
             return `
                 <a href="${basePath}blog/${post.slug}.html" class="blog-card">
                     <div class="blog-card-date">
-                        <time datetime="${post.date}">${formatDate(post.date).month} ${formatDate(post.date).day}, ${formatDate(post.date).year}</time>
+                        <span class="blog-month">${date.month}</span>
+                        <span class="blog-day">${date.day}</span>
+                        <span class="blog-year">${date.year}</span>
                     </div>
                     <div class="blog-card-body">
                         <h2 class="blog-card-title">${post.title}</h2>
