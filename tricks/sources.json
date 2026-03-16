@@ -1,37 +1,13 @@
 {
-  "total": 9,
+  "total": 12,
   "items": [
-    {
-      "key": "git.md",
-      "rel_path": "git.md",
-      "name": "git.md",
-      "display": "git",
-      "group": "root",
-      "count": 10
-    },
-    {
-      "key": "server.md",
-      "rel_path": "server.md",
-      "name": "server.md",
-      "display": "server",
-      "group": "root",
-      "count": 8
-    },
-    {
-      "key": "os.md",
-      "rel_path": "os.md",
-      "name": "os.md",
-      "display": "os",
-      "group": "root",
-      "count": 6
-    },
     {
       "key": "anaconda.md",
       "rel_path": "anaconda.md",
       "name": "anaconda.md",
       "display": "anaconda",
       "group": "root",
-      "count": 3
+      "count": 1
     },
     {
       "key": "dotfiles/README.md",
@@ -63,6 +39,54 @@
       "name": "yabairc",
       "display": "yabairc",
       "group": "dotfiles",
+      "count": 1
+    },
+    {
+      "key": "git.md",
+      "rel_path": "git.md",
+      "name": "git.md",
+      "display": "git",
+      "group": "root",
+      "count": 1
+    },
+    {
+      "key": "Installing_WebArena/download_webarena_gitlab.sh",
+      "rel_path": "Installing_WebArena/download_webarena_gitlab.sh",
+      "name": "download_webarena_gitlab.sh",
+      "display": "download webarena gitlab",
+      "group": "Installing_WebArena",
+      "count": 1
+    },
+    {
+      "key": "Installing_WebArena/WEBARENA_ADDITIONAL_SERVICES.md",
+      "rel_path": "Installing_WebArena/WEBARENA_ADDITIONAL_SERVICES.md",
+      "name": "WEBARENA_ADDITIONAL_SERVICES.md",
+      "display": "WEBARENA ADDITIONAL SERVICES",
+      "group": "Installing_WebArena",
+      "count": 1
+    },
+    {
+      "key": "Installing_WebArena/WEBARENA_GITLAB_WORKFLOW.md",
+      "rel_path": "Installing_WebArena/WEBARENA_GITLAB_WORKFLOW.md",
+      "name": "WEBARENA_GITLAB_WORKFLOW.md",
+      "display": "WEBARENA GITLAB WORKFLOW",
+      "group": "Installing_WebArena",
+      "count": 1
+    },
+    {
+      "key": "os.md",
+      "rel_path": "os.md",
+      "name": "os.md",
+      "display": "os",
+      "group": "root",
+      "count": 1
+    },
+    {
+      "key": "server.md",
+      "rel_path": "server.md",
+      "name": "server.md",
+      "display": "server",
+      "group": "root",
       "count": 1
     },
     {
