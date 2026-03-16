@@ -1,0 +1,77 @@
+{
+  "total": 9,
+  "items": [
+    {
+      "key": "git.md",
+      "rel_path": "git.md",
+      "name": "git.md",
+      "display": "git",
+      "group": "root",
+      "count": 10
+    },
+    {
+      "key": "server.md",
+      "rel_path": "server.md",
+      "name": "server.md",
+      "display": "server",
+      "group": "root",
+      "count": 8
+    },
+    {
+      "key": "os.md",
+      "rel_path": "os.md",
+      "name": "os.md",
+      "display": "os",
+      "group": "root",
+      "count": 6
+    },
+    {
+      "key": "anaconda.md",
+      "rel_path": "anaconda.md",
+      "name": "anaconda.md",
+      "display": "anaconda",
+      "group": "root",
+      "count": 3
+    },
+    {
+      "key": "dotfiles/README.md",
+      "rel_path": "dotfiles/README.md",
+      "name": "README.md",
+      "display": "README",
+      "group": "dotfiles",
+      "count": 1
+    },
+    {
+      "key": "dotfiles/skhdrc",
+      "rel_path": "dotfiles/skhdrc",
+      "name": "skhdrc",
+      "display": "skhdrc",
+      "group": "dotfiles",
+      "count": 1
+    },
+    {
+      "key": "dotfiles/tmux.conf",
+      "rel_path": "dotfiles/tmux.conf",
+      "name": "tmux.conf",
+      "display": "tmux",
+      "group": "dotfiles",
+      "count": 1
+    },
+    {
+      "key": "dotfiles/yabairc",
+      "rel_path": "dotfiles/yabairc",
+      "name": "yabairc",
+      "display": "yabairc",
+      "group": "dotfiles",
+      "count": 1
+    },
+    {
+      "key": "wandb.md",
+      "rel_path": "wandb.md",
+      "name": "wandb.md",
+      "display": "wandb",
+      "group": "root",
+      "count": 1
+    }
+  ]
+}
