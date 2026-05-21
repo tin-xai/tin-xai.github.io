@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Symbolic Reasoning — does two circles touch each others</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:#0f1117;color:#e0e0e0;padding:2rem 1rem;line-height:1.6;min-height:100vh}
+.container{max-width:1260px;margin:0 auto}
+h1{font-size:1.85rem;text-align:center;margin-bottom:.2em;
+  background:linear-gradient(135deg,#a78bfa,#60a5fa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;color:#555;font-size:.8rem;margin-bottom:1.6rem}
+.meta-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.chip{background:#1a1d27;border:1px solid #2a2d3a;border-radius:20px;
+  padding:.2rem .7rem;font-size:.76rem;color:#aaa}
+.chip strong{color:#ccc}
+.q-box{background:#1a1d27;border:1px solid #2a2d3a;border-radius:8px;
+  padding:.9rem 1.1rem;margin-bottom:.9rem}
+.q-box p{font-size:1rem;color:#e8e8ff;font-style:italic}
+.ctx-box{background:#161920;border:1px solid #2a2d3a;border-left:3px solid #f59e0b;
+  border-radius:0 8px 8px 0;padding:.7rem 1.1rem;margin-bottom:1rem;
+  font-size:.88rem;color:#ccc}
+.label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;
+  color:#777;margin-bottom:.3rem;font-weight:600}
+/* Layout */
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;
+  align-items:start;margin-bottom:1rem}
+@media(max-width:700px){.layout{grid-template-columns:1fr}
+  .img-panel{position:static!important}}
+.img-panel{position:sticky;top:1.4rem}
+.img-wrap{position:relative;display:block;line-height:0}
+.img-wrap img{display:block;width:100%;border-radius:8px;border:1px solid #2a2d3a}
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
+.legend-item{display:flex;align-items:center;gap:.3rem;font-size:.7rem;
+  color:#bbb;padding:.12rem .4rem;border-radius:4px;background:#1a1d27}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+/* Controls */
+.controls{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+.btn{background:#1e2130;border:1px solid #3a3d4a;border-radius:6px;
+  color:#c0c0f0;padding:.3rem .75rem;font-size:.78rem;cursor:pointer;
+  transition:background .15s,border-color .15s}
+.btn:hover{background:#252840;border-color:#5a5d8a}
+.btn.active{border-color:#a78bfa;color:#a78bfa}
+.spd-lbl{font-size:.73rem;color:#777}
+#spd{-webkit-appearance:none;width:78px;height:4px;
+  background:#2a2d3a;border-radius:2px;outline:none}
+#spd::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;
+  border-radius:50%;background:#a78bfa;cursor:pointer}
+.prog{margin-left:auto;font-size:.73rem;color:#555}
+/* Step cards */
+#chain{position:relative}
+.step-card{background:#1a1d27;border:1px solid #2a2d3a;
+  border-left:4px solid #888;border-radius:0 8px 8px 0;
+  padding:.85rem .95rem;margin-bottom:.7rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .38s ease,transform .38s ease}
+.step-card.vis{opacity:1;transform:translateY(0)}
+.step-head{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem;flex-wrap:wrap}
+.num{font-size:.68rem;color:#555;font-weight:600;min-width:18px}
+.badge{font-size:.68rem;font-weight:700;padding:.1rem .45rem;
+  border-radius:20px;border:1px solid;letter-spacing:.04em;text-transform:uppercase}
+.sym{font-family:'Fira Code','Cascadia Code',monospace;
+  font-size:.82rem;color:#d0d0ff;font-weight:600}
+.bbox-tag{font-size:.65rem;padding:.08rem .38rem;border:1px solid;
+  border-radius:4px;font-family:monospace;margin-left:auto}
+.body{font-size:.88rem;color:#d0d0e8;line-height:1.62;white-space:pre-wrap}
+.deps{margin-top:.45rem;font-size:.68rem;color:#666;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.28rem}
+.dep{font-family:monospace;background:#0f1117;border:1px solid #2a2d3a;
+  border-radius:3px;padding:.06rem .3rem;color:#9090c0;font-size:.68rem}
+/* Thinking */
+#thinking{display:none;align-items:center;gap:.55rem;
+  padding:.5rem .75rem;color:#777;font-size:.8rem;margin-bottom:.7rem}
+#thinking.vis{display:flex}
+.dots{display:flex;gap:3px}
+.dots span{width:5px;height:5px;border-radius:50%;background:#a78bfa;
+  animation:dp 1.2s ease-in-out infinite}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes dp{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+/* Answer */
+#ans{background:#1a1d27;border:1px solid #2a2d3a;border-top:3px solid #a78bfa;
+  border-radius:0 0 10px 10px;padding:1.2rem 1.3rem;margin-top:1.1rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .55s ease .1s,transform .55s ease .1s}
+#ans.vis{opacity:1;transform:translateY(0)}
+.ans-lbl{color:#a78bfa;font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.1em;font-weight:700;margin-bottom:.5rem}
+.ans-txt{font-size:1rem;color:#f0f0ff;line-height:1.68}
+.conf-row{display:flex;align-items:center;gap:.65rem;
+  margin-top:.9rem;font-size:.73rem;color:#777}
+.conf-wrap{flex:1;background:#2a2d3a;border-radius:4px;height:5px;overflow:hidden}
+.conf-bar{height:100%;border-radius:4px;width:0%;transition:width 1.1s ease}
+/* Graph */
+#graph-sec{display:none;margin-top:1.1rem}
+#graph-wrap{background:#0c0e14;border:1px solid #2a2d3a;
+  border-radius:10px;overflow:auto;padding:1rem .5rem .5rem}
+#graph-svg{display:block}
+/* Footer */
+.footer{text-align:center;color:#333;margin-top:2.5rem;
+  font-size:.75rem;border-top:1px solid #1a1d27;padding-top:.9rem}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Symbolic Reasoning Trace</h1>
+  <p class="sub">HOT Agentic Vision &bull; 2026-03-04 11:43:28</p>
+
+  <div class="meta-row">
+    <span class="chip"><strong>Model:</strong> gemini-2.5-flash</span>
+    <span class="chip"><strong>Type:</strong> visual</span>
+    <span class="chip"><strong>Steps:</strong> 6</span>
+  </div>
+
+  <div class="q-box">
+    <span class="label">Question</span>
+    <p>&ldquo;does two circles touch each others&rdquo;</p>
+  </div>
+  
+
+  <div class="layout">
+  <div class="img-panel">
+  <span class="label">Input Image</span>
+  <div class="img-wrap">
+    <img id="main-img" src="data:image/png;base64,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" alt="input">
+    <svg id="bbox-svg" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;overflow:visible;pointer-events:none;border-radius:8px;"></svg>
+  </div>
+</div>
+
+  <div class="steps-panel">
+    <div class="legend"><div class="legend-item"><div class="dot" style="background:#22c55e"></div>📥 GIVEN</div><div class="legend-item"><div class="dot" style="background:#3b82f6"></div>👁 OBSERVE</div><div class="legend-item"><div class="dot" style="background:#f59e0b"></div>🧠 RECALL</div><div class="legend-item"><div class="dot" style="background:#a855f7"></div>⚡ INFER</div><div class="legend-item"><div class="dot" style="background:#06b6d4"></div>✓ VERIFY</div><div class="legend-item"><div class="dot" style="background:#ef4444"></div>🎯 CONCLUDE</div></div>
+    <div class="controls">
+      <button class="btn" id="btnReplay">&#9654; Replay</button>
+      <button class="btn" id="btnAll">&#9654;&#9654; Show All</button>
+      <button class="btn" id="btnGraph">&#9906; Graph</button>
+      <span class="spd-lbl">Speed:</span>
+      <input type="range" id="spd" min="100" max="2000" value="700" step="100">
+      <span class="prog" id="prog">0 / 6</span>
+    </div>
+    <div id="chain">
+<div class="step-card" id="card-s1" data-id="s1" style="border-left-color:#3b82f6;">
+  <div class="step-head">
+    <span class="num">#1</span>
+    <span class="badge" style="background:#3b82f622;color:#3b82f6;border-color:#3b82f644;">👁 OBSERVE</span>
+    <span class="sym">observe_first_circle</span>
+    <span class="bbox-tag" style="color:#3b82f6;border-color:#3b82f666;">&#9632; blue circle</span>
+  </div>
+  <p class="body">A blue circle is present on the left side of the image.</p>
+  
+</div>
+<div class="step-card" id="card-s2" data-id="s2" style="border-left-color:#3b82f6;">
+  <div class="step-head">
+    <span class="num">#2</span>
+    <span class="badge" style="background:#3b82f622;color:#3b82f6;border-color:#3b82f644;">👁 OBSERVE</span>
+    <span class="sym">observe_second_circle</span>
+    <span class="bbox-tag" style="color:#3b82f6;border-color:#3b82f666;">&#9632; magenta circle</span>
+  </div>
+  <p class="body">A magenta circle is present on the right side of the image.</p>
+  
+</div>
+<div class="step-card" id="card-s3" data-id="s3" style="border-left-color:#a855f7;">
+  <div class="step-head">
+    <span class="num">#3</span>
+    <span class="badge" style="background:#a855f722;color:#a855f7;border-color:#a855f744;">⚡ INFER</span>
+    <span class="sym">infer_proximity</span>
+    
+  </div>
+  <p class="body">The two circles are positioned very close to each other.</p>
+  <div class="deps">builds on: <span class="dep">s1</span><span class="dep">s2</span></div>
+</div>
+<div class="step-card" id="card-s4" data-id="s4" style="border-left-color:#3b82f6;">
+  <div class="step-head">
+    <span class="num">#4</span>
+    <span class="badge" style="background:#3b82f622;color:#3b82f6;border-color:#3b82f644;">👁 OBSERVE</span>
+    <span class="sym">examine_boundaries</span>
+    <span class="bbox-tag" style="color:#3b82f6;border-color:#3b82f666;">&#9632; space between circles</span>
+  </div>
+  <p class="body">Upon close examination of the space between the blue circle and the magenta circle, there is no visible gap.</p>
+  <div class="deps">builds on: <span class="dep">s1</span><span class="dep">s2</span></div>
+</div>
+<div class="step-card" id="card-s5" data-id="s5" style="border-left-color:#a855f7;">
+  <div class="step-head">
+    <span class="num">#5</span>
+    <span class="badge" style="background:#a855f722;color:#a855f7;border-color:#a855f744;">⚡ INFER</span>
+    <span class="sym">infer_contact</span>
+    
+  </div>
+  <p class="body">The absence of a visible gap indicates that the boundaries of the two circles are in contact.</p>
+  <div class="deps">builds on: <span class="dep">s4</span></div>
+</div>
+<div class="step-card" id="card-s6" data-id="s6" style="border-left-color:#ef4444;">
+  <div class="step-head">
+    <span class="num">#6</span>
+    <span class="badge" style="background:#ef444422;color:#ef4444;border-color:#ef444444;">🎯 CONCLUDE</span>
+    <span class="sym">conclude_touching</span>
+    
+  </div>
+  <p class="body">Based on the observation that there is no space between them, the two circles are touching each other.</p>
+  <div class="deps">builds on: <span class="dep">s5</span></div>
+</div>
+    </div>
+    <div id="thinking"><div class="dots"><span></span><span></span><span></span></div><span>Reasoning&hellip;</span></div>
+  </div>
+  </div>
+
+  <div id="graph-sec">
+    <span class="label" style="margin-bottom:.45rem;display:block">Reasoning Graph</span>
+    <div id="graph-wrap"><svg id="graph-svg" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  </div>
+
+  <div id="ans">
+    <div class="ans-lbl">&#127919; Final Answer</div>
+    <p class="ans-txt">Yes, the two circles are touching each other. There is no visible space separating their boundaries.</p>
+    <div class="conf-row">
+      <span>Confidence:</span>
+      <div class="conf-wrap"><div class="conf-bar" id="cbar" style="background:#22c55e"></div></div>
+      <span>100%</span>
+    </div>
+  </div>
+
+  <div class="footer">Symbolic Reasoning &bull; HOT Agentic Vision</div>
+</div>
+
+<script>
+(function() {
+  var STEPS = [{"id": "s1", "symbol": "observe_first_circle", "type": "OBSERVE", "content": "A blue circle is present on the left side of the image.", "deps": [], "color": "#3b82f6", "icon": "👁", "bbox": {"x1": 0.16, "y1": 0.28, "x2": 0.44, "y2": 0.58, "label": "blue circle"}}, {"id": "s2", "symbol": "observe_second_circle", "type": "OBSERVE", "content": "A magenta circle is present on the right side of the image.", "deps": [], "color": "#3b82f6", "icon": "👁", "bbox": {"x1": 0.45, "y1": 0.28, "x2": 0.73, "y2": 0.58, "label": "magenta circle"}}, {"id": "s3", "symbol": "infer_proximity", "type": "INFER", "content": "The two circles are positioned very close to each other.", "deps": ["s1", "s2"], "color": "#a855f7", "icon": "⚡", "bbox": null}, {"id": "s4", "symbol": "examine_boundaries", "type": "OBSERVE", "content": "Upon close examination of the space between the blue circle and the magenta circle, there is no visible gap.", "deps": ["s1", "s2"], "color": "#3b82f6", "icon": "👁", "bbox": {"x1": 0.43, "y1": 0.28, "x2": 0.46, "y2": 0.58, "label": "space between circles"}}, {"id": "s5", "symbol": "infer_contact", "type": "INFER", "content": "The absence of a visible gap indicates that the boundaries of the two circles are in contact.", "deps": ["s4"], "color": "#a855f7", "icon": "⚡", "bbox": null}, {"id": "s6", "symbol": "conclude_touching", "type": "CONCLUDE", "content": "Based on the observation that there is no space between them, the two circles are touching each other.", "deps": ["s5"], "color": "#ef4444", "icon": "🎯", "bbox": null}];
+  var CONF  = 1.0;
+  var TOTAL = STEPS.length;
+  var NS    = 'http://www.w3.org/2000/svg';
+
+  var timer = null;
+  var speed = 700;
+  var started = false;
+
+  var cards    = [].slice.call(document.querySelectorAll('.step-card'));
+  var thinking = document.getElementById('thinking');
+  var ans      = document.getElementById('ans');
+  var cbar     = document.getElementById('cbar');
+  var prog     = document.getElementById('prog');
+  var spd      = document.getElementById('spd');
+
+  function setProgress(n) { prog.textContent = n + ' / ' + TOTAL; }
+
+  // ── Bbox overlay ─────────────────────────────────────────────────────────
+  function buildBboxOverlay() {
+    var img = document.getElementById('main-img');
+    var svg = document.getElementById('bbox-svg');
+    if (!img || !svg) return;
+    var W = img.clientWidth, H = img.clientHeight;
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.innerHTML = '';
+
+    STEPS.forEach(function(step, idx) {
+      if (!step.bbox) return;
+      var b = step.bbox;
+      var x = b.x1 * W, y = b.y1 * H;
+      var w = (b.x2 - b.x1) * W, h = (b.y2 - b.y1) * H;
+
+      var g = document.createElementNS(NS, 'g');
+      g.id = 'bg-' + step.id;
+      g.style.opacity = '0';
+      g.style.transition = 'opacity .45s ease';
+
+      var rect = document.createElementNS(NS, 'rect');
+      rect.id = 'br-' + step.id;
+      rect.setAttribute('x', x); rect.setAttribute('y', y);
+      rect.setAttribute('width', w); rect.setAttribute('height', h);
+      rect.setAttribute('fill', step.color); rect.setAttribute('fill-opacity', '0.1');
+      rect.setAttribute('stroke', step.color); rect.setAttribute('stroke-width', '2.5');
+      rect.setAttribute('rx', '4');
+      rect.style.transition = 'fill-opacity .22s ease';
+
+      var cx = Math.min(x + 13, x + w - 13);
+      var cy = Math.min(y + 13, y + h - 13);
+      var circle = document.createElementNS(NS, 'circle');
+      circle.setAttribute('cx', cx); circle.setAttribute('cy', cy);
+      circle.setAttribute('r', '11'); circle.setAttribute('fill', step.color);
+      circle.setAttribute('stroke', '#0f1117'); circle.setAttribute('stroke-width', '1.5');
+
+      var numTxt = document.createElementNS(NS, 'text');
+      numTxt.setAttribute('x', cx); numTxt.setAttribute('y', cy);
+      numTxt.setAttribute('text-anchor', 'middle');
+      numTxt.setAttribute('dominant-baseline', 'central');
+      numTxt.setAttribute('fill', 'white'); numTxt.setAttribute('font-size', '10');
+      numTxt.setAttribute('font-weight', 'bold'); numTxt.setAttribute('font-family', 'system-ui');
+      numTxt.textContent = idx + 1;
+
+      g.appendChild(rect); g.appendChild(circle); g.appendChild(numTxt);
+      svg.appendChild(g);
+    });
+  }
+
+  var mainImg = document.getElementById('main-img');
+  if (mainImg) {
+    mainImg.addEventListener('load', buildBboxOverlay);
+    window.addEventListener('resize', buildBboxOverlay);
+    if (mainImg.complete) setTimeout(buildBboxOverlay, 50);
+  }
+
+  // ── Animation ─────────────────────────────────────────────────────────────
+  function showCard(idx) {
+    cards[idx].classList.add('vis');
+    setProgress(idx + 1);
+    var step = STEPS[idx];
+    if (step.bbox) {
+      var g = document.getElementById('bg-' + step.id);
+      var r = document.getElementById('br-' + step.id);
+      if (g) g.style.opacity = '1';
+      if (r) {
+        r.setAttribute('fill-opacity', '0.35');
+        setTimeout(function() { r.setAttribute('fill-opacity', '0.1'); }, 900);
+      }
+    }
+  }
+
+  function setThinking(on) { thinking.classList.toggle('vis', on); }
+
+  function showAnswer() {
+    setThinking(false);
+    ans.classList.add('vis');
+    setTimeout(function() { cbar.style.width = (CONF * 100) + '%'; }, 180);
+  }
+
+  function hideAllBboxes() {
+    document.querySelectorAll('[id^="bg-"]').forEach(function(g) { g.style.opacity = '0'; });
+  }
+  function showAllBboxes() {
+    document.querySelectorAll('[id^="bg-"]').forEach(function(g) { g.style.opacity = '1'; });
+  }
+
+  function reset() {
+    clearTimeout(timer);
+    cards.forEach(function(c) { c.classList.remove('vis'); });
+    ans.classList.remove('vis');
+    cbar.style.width = '0%';
+    setThinking(false);
+    setProgress(0);
+    hideAllBboxes();
+  }
+
+  function playFrom(idx) {
+    if (idx >= TOTAL) { showAnswer(); return; }
+    showCard(idx);
+    setThinking(idx < TOTAL - 1);
+    timer = setTimeout(function() { playFrom(idx + 1); }, speed);
+  }
+
+  function replay() {
+    reset();
+    speed = parseInt(spd.value);
+    setTimeout(function() { playFrom(0); }, 280);
+  }
+
+  function showAll() {
+    clearTimeout(timer);
+    cards.forEach(function(c) { c.classList.add('vis'); });
+    showAllBboxes();
+    setProgress(TOTAL);
+    showAnswer();
+  }
+
+  if (spd) spd.addEventListener('input', function() { speed = parseInt(spd.value); });
+
+  var btnReplay = document.getElementById('btnReplay');
+  var btnAll    = document.getElementById('btnAll');
+  var btnGraph  = document.getElementById('btnGraph');
+  if (btnReplay) btnReplay.addEventListener('click', replay);
+  if (btnAll)    btnAll.addEventListener('click', showAll);
+
+  // Hover: card <-> bbox
+  cards.forEach(function(card, idx) {
+    var step = STEPS[idx];
+    if (!step || !step.bbox) return;
+    card.addEventListener('mouseenter', function() {
+      var r = document.getElementById('br-' + step.id);
+      if (r) r.setAttribute('fill-opacity', '0.28');
+    });
+    card.addEventListener('mouseleave', function() {
+      var r = document.getElementById('br-' + step.id);
+      if (r) r.setAttribute('fill-opacity', '0.1');
+    });
+  });
+
+  // ── Graph view ────────────────────────────────────────────────────────────
+  var graphSec = document.getElementById('graph-sec');
+
+  if (btnGraph) btnGraph.addEventListener('click', function() {
+    var open = graphSec.style.display === 'block';
+    graphSec.style.display = open ? 'none' : 'block';
+    btnGraph.classList.toggle('active', !open);
+    if (!open) buildGraph();
+  });
+
+  function computeLevels() {
+    var lv = {};
+    STEPS.forEach(function(s) { lv[s.id] = 0; });
+    for (var pass = 0; pass < STEPS.length; pass++) {
+      STEPS.forEach(function(s) {
+        (s.deps || []).forEach(function(d) {
+          if (lv[d] !== undefined) lv[s.id] = Math.max(lv[s.id], lv[d] + 1);
+        });
+      });
+    }
+    return lv;
+  }
+
+  function buildGraph() {
+    var svg = document.getElementById('graph-svg');
+    if (svg.dataset.built) return;
+    svg.dataset.built = '1';
+
+    var wrap = document.getElementById('graph-wrap');
+    var W = wrap.clientWidth - 24;
+
+    var NW = 150, NH = 56, HGAP = 12, VGAP = 44;
+    var lv = computeLevels();
+    var maxLv = 0;
+    STEPS.forEach(function(s) { if (lv[s.id] > maxLv) maxLv = lv[s.id]; });
+
+    var groups = {};
+    STEPS.forEach(function(s) {
+      var l = lv[s.id] || 0;
+      if (!groups[l]) groups[l] = [];
+      groups[l].push(s);
+    });
+
+    var pos = {};
+    Object.keys(groups).forEach(function(level) {
+      var items = groups[level];
+      var totalW = items.length * (NW + HGAP) - HGAP;
+      var startX = Math.max(4, (W - totalW) / 2);
+      items.forEach(function(s, i) {
+        var x = startX + i * (NW + HGAP);
+        var y = 20 + parseInt(level) * (NH + VGAP);
+        pos[s.id] = { x: x, y: y, cx: x + NW / 2, cy: y + NH / 2,
+                       top: y, bot: y + NH };
+      });
+    });
+
+    var SVG_H = 20 + (maxLv + 1) * (NH + VGAP) + 28;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + SVG_H);
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', SVG_H);
+
+    // Arrow marker
+    var defs = document.createElementNS(NS, 'defs');
+    var marker = document.createElementNS(NS, 'marker');
+    marker.setAttribute('id', 'arr');
+    marker.setAttribute('markerWidth', '8'); marker.setAttribute('markerHeight', '6');
+    marker.setAttribute('refX', '7'); marker.setAttribute('refY', '3');
+    marker.setAttribute('orient', 'auto');
+    var poly = document.createElementNS(NS, 'polygon');
+    poly.setAttribute('points', '0 0,8 3,0 6');
+    poly.setAttribute('fill', '#555');
+    marker.appendChild(poly);
+    defs.appendChild(marker);
+    svg.appendChild(defs);
+
+    // Dep edges (drawn first, behind nodes)
+    STEPS.forEach(function(step) {
+      (step.deps || []).forEach(function(depId) {
+        if (!pos[depId] || !pos[step.id]) return;
+        var fr = pos[depId], to = pos[step.id];
+        var my = (fr.bot + to.top) / 2;
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d',
+          'M ' + fr.cx + ' ' + fr.bot +
+          ' C ' + fr.cx + ' ' + my +
+          ',' + to.cx + ' ' + my +
+          ',' + to.cx + ' ' + to.top);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', '#444');
+        path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('marker-end', 'url(#arr)');
+        svg.appendChild(path);
+      });
+    });
+
+    // Nodes
+    STEPS.forEach(function(step, idx) {
+      if (!pos[step.id]) return;
+      var p = pos[step.id];
+      var g = document.createElementNS(NS, 'g');
+
+      var shadow = document.createElementNS(NS, 'rect');
+      shadow.setAttribute('x', p.x + 2); shadow.setAttribute('y', p.y + 3);
+      shadow.setAttribute('width', NW); shadow.setAttribute('height', NH);
+      shadow.setAttribute('fill', '#000'); shadow.setAttribute('fill-opacity', '0.3');
+      shadow.setAttribute('rx', '6');
+      g.appendChild(shadow);
+
+      var rect = document.createElementNS(NS, 'rect');
+      rect.setAttribute('x', p.x); rect.setAttribute('y', p.y);
+      rect.setAttribute('width', NW); rect.setAttribute('height', NH);
+      rect.setAttribute('fill', '#1a1d27'); rect.setAttribute('rx', '6');
+      rect.setAttribute('stroke', step.color); rect.setAttribute('stroke-width', '1.5');
+      g.appendChild(rect);
+
+      var acc = document.createElementNS(NS, 'rect');
+      acc.setAttribute('x', p.x); acc.setAttribute('y', p.y);
+      acc.setAttribute('width', '4'); acc.setAttribute('height', NH);
+      acc.setAttribute('fill', step.color); acc.setAttribute('rx', '6');
+      g.appendChild(acc);
+
+      var ncx = p.x + 20, ncy = p.cy;
+      var nbg = document.createElementNS(NS, 'circle');
+      nbg.setAttribute('cx', ncx); nbg.setAttribute('cy', ncy);
+      nbg.setAttribute('r', '11'); nbg.setAttribute('fill', step.color);
+      nbg.setAttribute('fill-opacity', '0.22');
+      g.appendChild(nbg);
+
+      var ntxt = document.createElementNS(NS, 'text');
+      ntxt.setAttribute('x', ncx); ntxt.setAttribute('y', ncy);
+      ntxt.setAttribute('text-anchor', 'middle'); ntxt.setAttribute('dominant-baseline', 'central');
+      ntxt.setAttribute('fill', step.color); ntxt.setAttribute('font-size', '10');
+      ntxt.setAttribute('font-weight', 'bold'); ntxt.setAttribute('font-family', 'system-ui');
+      ntxt.textContent = idx + 1;
+      g.appendChild(ntxt);
+
+      var tt = document.createElementNS(NS, 'text');
+      tt.setAttribute('x', p.x + 36); tt.setAttribute('y', p.y + 17);
+      tt.setAttribute('fill', step.color); tt.setAttribute('font-size', '9');
+      tt.setAttribute('font-weight', '700'); tt.setAttribute('font-family', 'system-ui');
+      tt.setAttribute('letter-spacing', '0.06em');
+      tt.textContent = step.icon + ' ' + step.type;
+      g.appendChild(tt);
+
+      var st = document.createElementNS(NS, 'text');
+      st.setAttribute('x', p.x + 36); st.setAttribute('y', p.y + 34);
+      st.setAttribute('fill', '#c8c8f0'); st.setAttribute('font-size', '10');
+      st.setAttribute('font-family', "'Fira Code',monospace");
+      var sym = step.symbol;
+      st.textContent = sym.length > 14 ? sym.slice(0, 13) + '…' : sym;
+      g.appendChild(st);
+
+      var title = document.createElementNS(NS, 'title');
+      var preview = step.content.length > 100 ? step.content.slice(0, 100) + '…' : step.content;
+      title.textContent = '[' + step.type + '] ' + step.symbol + '\n' + preview;
+      g.appendChild(title);
+
+      svg.appendChild(g);
+    });
+  }
+
+  // Auto-start
+  function start() {
+    if (started) return;
+    started = true;
+    try { buildBboxOverlay(); } catch(e) {}
+    setTimeout(function() { playFrom(0); }, 200);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(start, 100);
+  } else {
+    window.addEventListener('load', function() { setTimeout(start, 100); });
+  }
+  setTimeout(function() { if (!started) start(); }, 1500);
+})();
+</script>
+</body>
+</html>
