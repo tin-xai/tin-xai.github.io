@@ -9,7 +9,7 @@
 /* ---------- CSS Custom Properties ---------- */
 :root {
   --font-main: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --color-bg: #fafbfe;
+  --color-bg: #fdf8f2;
   --color-surface: #ffffff;
   --color-text: #2d3748;
   --color-text-muted: #64748b;
