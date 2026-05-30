@@ -95,6 +95,24 @@ a:focus {
   width: 200px;
 }
 
+.profile-emails {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 6px;
+}
+
+.profile-emails a {
+  font-size: 13px;
+  color: var(--color-text);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.profile-emails a:hover {
+  color: var(--color-accent);
+}
+
 .profile-photo-wrapper .social-links {
   flex-direction: row;
   flex-wrap: wrap;
@@ -111,7 +129,7 @@ a:focus {
 }
 
 .profile-photo-wrapper .social-link--cv {
-  padding: 6px 16px;
+  padding: 6px 10px;
   border: 1.5px solid var(--color-text);
   border-radius: var(--radius-full);
   background: transparent;
