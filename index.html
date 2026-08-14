@@ -19,10 +19,10 @@
 
 <body>
   <div class="page-wrapper">
+    <div class="layout">
 
-    <!-- ========== Profile ========== -->
-    <header class="profile-section">
-      <div class="profile-photo-wrapper">
+      <aside class="sidebar">
+        <div class="profile-photo-wrapper">
         <a href="assets/aboutme/tin2.jpg">
           <img src="assets/aboutme/tin2.jpg" alt="Tin Nguyen" class="profile-photo">
         </a>
@@ -39,9 +39,11 @@
           <a href="https://huggingface.co/ttn0011" class="social-link social-link--icon" title="Hugging Face">🤗</a>
           <a href="https://www.youtube.com/@tinkevinnguyen" class="social-link social-link--icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
-      </div>
+        </div>
+      </aside>
 
-      <div class="profile-info">
+      <div class="main-column">
+        <div class="profile-info">
         <h1 class="profile-name">Tin (Kevin) Nguyen</h1>
 
         <p class="profile-bio">
@@ -63,13 +65,103 @@
         </p>
 
         <div class="cta-banner">
-          I'm looking for <b>research internship opportunities</b> around <b>LLMs, VLMs, Agents</b>
+          I'm looking for <b>postdoc, internship, and full-time opportunities</b> around <b>LLMs, VLMs, Agents</b>
           👀
           Please email me if you think I'd be a good fit:
           <b>ngthanhtinqn@gmail.com</b> or <b>ttn0011@auburn.edu</b> 🤗
         </div>
+        </div>
+
+    <!-- ========== Education / Experience / Honors ========== -->
+    <section class="section fade-in" id="resume">
+      <div class="resume-card">
+        <div class="resume-col">
+          <h3 class="resume-heading">Education</h3>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🎓</span> Auburn University</div>
+            <div class="resume-role">Ph.D. in Computer Science and Engineering</div>
+            <div class="resume-meta">AL, U.S. &middot; Aug. 2022 &ndash; present</div>
+            <div class="resume-sub">Advisor: Anh (Totti) Nguyen</div>
+            <div class="resume-sub">Teaching Assistant: Formal Languages, Machine Learning, Security</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🎓</span> Sejong University</div>
+            <div class="resume-role">M.Sc. in Computer Science and Engineering</div>
+            <div class="resume-meta">Seoul, S. Korea &middot; 2020 &ndash; 2022</div>
+            <div class="resume-sub">Advisor: Kim Yong-Guk</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🎓</span> University of Science</div>
+            <div class="resume-role">B.A. in Computer Science and Engineering</div>
+            <div class="resume-meta">Ho Chi Minh, Vietnam &middot; 2015 &ndash; 2019</div>
+            <div class="resume-sub">Advisor: Ngoc Quoc Ly</div>
+          </div>
+        </div>
+
+        <div class="resume-col">
+          <h3 class="resume-heading">Experience</h3>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">💼</span> Aikyam Lab, University of Virginia</div>
+            <div class="resume-role">Graduate Research Assistant</div>
+            <div class="resume-meta">VA, U.S. &middot; May &ndash; Aug. 2026</div>
+            <div class="resume-sub">Advisor: Chirag Agarwal &middot; Project: Multimodal Agentic Models + Trustworthy AI</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">💼</span> AIOZ Co., Ltd.</div>
+            <div class="resume-role">AI Engineer</div>
+            <div class="resume-meta">Ho Chi Minh, Vietnam &middot; 2019 &ndash; 2020</div>
+            <div class="resume-sub">Built a license plate recognition system and a ball tracking system</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">💼</span> Gumi Co., Ltd.</div>
+            <div class="resume-role">AI Engineer Intern</div>
+            <div class="resume-meta">Ho Chi Minh, Vietnam &middot; 2018 &ndash; 2019</div>
+            <div class="resume-sub">Built Japanese character recognition for bills and documents</div>
+          </div>
+
+          <!-- <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">💼</span> Gameloft</div>
+            <div class="resume-role">Game Programmer Intern</div>
+            <div class="resume-meta">Ho Chi Minh, Vietnam &middot; 2017 &ndash; 2018</div>
+            <div class="resume-sub">Built an arcade game using Cocos2dx</div>
+          </div> -->
+        </div>
+
+        <div class="resume-col">
+          <h3 class="resume-heading">Honors &amp; Awards</h3>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🏆</span> Tinker Research Grant</div>
+            <div class="resume-meta">Aug. 2026</div>
+            <div class="resume-sub">Tinker &middot; Awarded $5,000 for compute/API credits</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🏆</span> GSC Travel Fellowship</div>
+            <div class="resume-meta">Dec. 2025</div>
+            <div class="resume-sub">Auburn University Graduate School Council &middot; Awarded $400 to support conference travel</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🏆</span> Tinker Promotion</div>
+            <div class="resume-meta">Nov. 2025</div>
+            <div class="resume-sub">Tinker &middot; Awarded $150 in credits</div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-org"><span class="resume-icon">🏆</span> 1st Prize, AICovidVN Challenge</div>
+            <div class="resume-meta">2021</div>
+            <div class="resume-sub">Ho Chi Minh, Vietnam &middot; Introduced Fruit-CoV, a framework detecting SARS-CoV-2 through cough sounds (~$4,300 prize)</div>
+          </div>
+        </div>
       </div>
-    </header>
+    </section>
 
     <!-- ========== Research Interest ========== -->
     <!-- <section class="section about-section fade-in" id="about"> -->
@@ -131,7 +223,7 @@
     <!-- </section> -->
 
     <!-- ========== News ========== -->
-    <section class="section fade-in" id="news">
+    <!-- <section class="section fade-in" id="news">
       <h2 class="section-title">News</h2>
       <ul class="reviewer-list">
         <li><b>[Aug 2026]</b> Awarded the <b>Tinker Research Grant</b> ($5,000) for compute/API credits.</li>
@@ -139,7 +231,7 @@
         <li><b>[Dec 2025]</b> Awarded a <b>GSC Travel Fellowship</b> ($400) by the Auburn University Graduate School Council to support conference travel.</li>
         <li><b>[Nov 2025]</b> Awarded <b>Tinker Promotion</b> credits ($150).</li>
       </ul>
-    </section>
+    </section> -->
 
     <!-- ========== Publications ========== -->
     <section class="section" id="publications">
@@ -294,6 +386,27 @@
           </div>
         </div>
 
+        <!-- Other: Korean Patent -->
+        <div class="pub-card" data-featured="false">
+          <div class="pub-thumb">
+            <div class="pub-thumb-img">
+              <img src="assets/papers/vizdoom/vizdoom_instruction.gif" alt="Korean patent figure">
+            </div>
+          </div>
+          <div class="pub-content">
+            <div class="pub-title">
+              <a href="data/IP-2024-133-KR_등록증.pdf">Coarse-to-Fine Fusion Method and Apparatus for Language-Command-Based Virtual Space Navigation (Korean Patent)</a>
+            </div>
+            <div class="pub-authors">
+              Yong-Guk Kim, Soo-Mi Choi, Anh H. Vo, <strong>Tin Nguyen</strong>
+            </div>
+            <div class="pub-venue">Korean Patent No. 10-2979119 &mdash; Registered Jun 2026</div>
+            <div class="pub-links">
+              <a href="data/IP-2024-133-KR_등록증.pdf" class="pub-link">Certificate</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -331,6 +444,8 @@
       </section>
     </span> -->
 
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

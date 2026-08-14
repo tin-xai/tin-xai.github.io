@@ -25,7 +25,7 @@
   --color-tag-yellow-text: #92400e;
   --color-cta-bg: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
   --color-cta-border: #fecaca;
-  --max-width: 860px;
+  --max-width: 1100px;
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -79,11 +79,22 @@ a:focus {
 }
 
 /* ---------- Header / Profile ---------- */
-.profile-section {
+.layout {
   display: flex;
   align-items: flex-start;
   gap: 40px;
-  margin-bottom: 20px;
+}
+
+.sidebar {
+  flex-shrink: 0;
+  position: sticky;
+  top: 32px;
+  align-self: flex-start;
+}
+
+.main-column {
+  flex: 1;
+  min-width: 0;
 }
 
 .profile-photo-wrapper {
@@ -336,6 +347,69 @@ a:focus {
   padding-bottom: 10px;
   border-bottom: 2px solid var(--color-accent);
   display: inline-block;
+}
+
+/* ---------- Resume Card (Education / Experience / Honors) ---------- */
+.resume-card {
+  display: flex;
+  gap: 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px 32px;
+}
+
+.resume-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.resume-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  margin-bottom: 14px;
+}
+
+.resume-entry {
+  margin-bottom: 18px;
+}
+
+.resume-entry:last-child {
+  margin-bottom: 0;
+}
+
+.resume-org {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.4;
+}
+
+.resume-icon {
+  margin-right: 2px;
+}
+
+.resume-role {
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--color-text);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.resume-meta {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.resume-sub {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin-top: 3px;
 }
 
 /* ---------- Publication Filter ---------- */
@@ -1334,16 +1408,34 @@ a:focus {
     padding: 24px 16px 40px;
   }
 
-  .profile-section {
+  .layout {
     flex-direction: column;
     align-items: center;
-    text-align: center;
     gap: 20px;
+  }
+
+  .sidebar {
+    position: static;
+    align-self: center;
+  }
+
+  .main-column {
+    width: 100%;
+  }
+
+  .profile-info {
+    text-align: center;
   }
 
   .profile-photo-wrapper {
     width: auto;
     align-items: center;
+  }
+
+  .resume-card {
+    flex-direction: column;
+    gap: 24px;
+    padding: 22px 20px;
   }
 
   .profile-photo-wrapper > a {
