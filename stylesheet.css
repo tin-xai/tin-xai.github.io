@@ -689,6 +689,7 @@ a:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  margin-bottom: 8px;
 }
 
 .pub-tag {
