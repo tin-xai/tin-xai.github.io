@@ -379,6 +379,88 @@ a:focus {
   margin-bottom: 0;
 }
 
+.resume-slider {
+  position: relative;
+}
+
+.resume-slide {
+  display: none;
+}
+
+.resume-slide.is-active {
+  display: block;
+  margin-bottom: 0;
+  animation: resumeFade 0.25s ease;
+}
+
+@keyframes resumeFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.resume-slider-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.resume-slider-nav.is-hidden {
+  display: none;
+}
+
+.resume-nav-btn {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.resume-nav-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.resume-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.resume-dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.resume-dot.is-active {
+  width: 16px;
+  background: var(--color-accent);
+}
+
 .resume-org {
   font-size: 13.5px;
   font-weight: 700;
