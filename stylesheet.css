@@ -867,6 +867,13 @@ a:focus {
   border-color: var(--color-accent);
 }
 
+.pub-desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
 /* ---------- Interests ---------- */
 .interests-intro {
   font-size: 14.5px;
