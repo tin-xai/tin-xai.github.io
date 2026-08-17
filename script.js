@@ -84,6 +84,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Publication media sliders (e.g. HoT teaser images)
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.pub-media-slider').forEach(media => {
+        const slides = Array.from(media.querySelectorAll('.pub-media-slide'));
+        const prevBtn = media.querySelector('.pub-media-nav--prev');
+        const nextBtn = media.querySelector('.pub-media-nav--next');
+        const dotsWrap = media.querySelector('.pub-media-dots');
+        if (slides.length <= 1) {
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+            return;
+        }
+
+        let index = slides.findIndex(s => s.classList.contains('is-active'));
+        if (index < 0) index = 0;
+
+        const dots = slides.map((_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'pub-media-dot';
+            dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+            return dot;
+        });
+
+        function update() {
+            slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
+            dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+        }
+
+        function goTo(i) {
+            index = (i + slides.length) % slides.length;
+            update();
+        }
+
+        prevBtn.addEventListener('click', () => goTo(index - 1));
+        nextBtn.addEventListener('click', () => goTo(index + 1));
+
+        update();
+    });
+});
+
 // Scroll-reveal for elements with class "fade-in"
 document.addEventListener('DOMContentLoaded', () => {
     const faders = document.querySelectorAll('.fade-in');
