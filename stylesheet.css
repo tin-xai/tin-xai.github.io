@@ -90,6 +90,28 @@ a:focus {
   position: sticky;
   top: 32px;
   align-self: flex-start;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #c3c9d4 transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #c3c9d4;
+  border-radius: var(--radius-full);
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
 }
 
 .main-column {
@@ -1660,6 +1682,9 @@ a:focus {
   .sidebar {
     position: static;
     align-self: center;
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
   }
 
   .main-column {
