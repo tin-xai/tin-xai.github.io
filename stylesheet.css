@@ -162,13 +162,13 @@ a:focus {
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 8px 12px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: 12.5px;
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #dce8e3;
+  background: rgba(255, 255, 255, 0.42);
+  color: #24313a;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
   font-weight: 600;
   text-align: left;
   cursor: pointer;
@@ -178,14 +178,14 @@ a:focus {
 .resume-quick-btn:hover,
 .resume-quick-btn:focus-visible,
 .resume-quick-btn.is-active {
-  background: var(--color-accent);
+  background: #2f7d6d;
   color: #fff;
-  border-color: var(--color-accent);
+  border-color: #2f7d6d;
   transform: translateY(-1px);
 }
 
 .resume-quick-icon {
-  font-size: 14px;
+  font-size: 13px;
   flex-shrink: 0;
 }
 
@@ -426,6 +426,53 @@ a:focus {
   font-size: 14px;
 }
 
+/* ---------- Elsewhere Online ---------- */
+.elsewhere-online {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  width: max-content;
+  margin: 30px 0 0 auto;
+}
+
+.elsewhere-online-label {
+  color: var(--color-text-muted);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.elsewhere-online-links {
+  display: flex;
+  gap: 6px;
+}
+
+.elsewhere-online-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 12.5px;
+  transition: all var(--transition);
+}
+
+.elsewhere-online-link:hover,
+.elsewhere-online-link:focus {
+  background: #2f7d6d;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.elsewhere-online-link i {
+  font-size: 12.5px;
+}
+
 /* ---------- CTA Banner ---------- */
 .cta-banner {
   background: var(--color-cta-bg);
@@ -479,109 +526,214 @@ a:focus {
   }
 }
 
+/* ---------- Resume Panels ---------- */
+.page-view[data-page="education"],
+.page-view[data-page="experience"],
+.page-view[data-page="honors"],
+.page-view[data-page="skills"] {
+  --resume-ink: #24313a;
+  --resume-muted: #6d7b83;
+  --resume-soft: #eef4f1;
+  --resume-accent: #2f7d6d;
+  --resume-accent-deep: #19564d;
+  --resume-warm: #b85c2d;
+  color: var(--resume-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+.page-view[data-page="education"] .section-title,
+.page-view[data-page="experience"] .section-title,
+.page-view[data-page="honors"] .section-title,
+.page-view[data-page="skills"] .section-title {
+  position: relative;
+  margin-bottom: 28px;
+  padding-bottom: 8px;
+  border-bottom: 0;
+  color: var(--resume-accent-deep);
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.page-view[data-page="education"] .section-title::after,
+.page-view[data-page="experience"] .section-title::after,
+.page-view[data-page="honors"] .section-title::after,
+.page-view[data-page="skills"] .section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 44px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--resume-warm);
+}
+
 /* ---------- Timeline (Education) ---------- */
+.timeline {
+  max-width: 760px;
+}
+
 .timeline-item {
   display: grid;
-  grid-template-columns: 10px 1fr;
-  gap: 16px;
+  grid-template-columns: 14px 1fr;
+  gap: 18px;
 }
 
 .timeline-rail {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 5px;
+  padding-top: 8px;
 }
 
 .timeline-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--resume-accent);
+  border: 3px solid var(--resume-soft);
+  box-shadow: 0 0 0 1px rgba(47, 125, 109, 0.22);
   flex-shrink: 0;
 }
 
 .timeline-line {
   width: 2px;
   flex: 1;
-  min-height: 24px;
-  background: var(--color-border);
-  margin-top: 4px;
+  min-height: 28px;
+  background: #d9e5df;
+  margin-top: 6px;
 }
 
 .timeline-info {
-  padding-bottom: 20px;
+  padding-bottom: 24px;
 }
 
 .timeline-org {
-  font-size: 14.5px;
+  font-size: 17px;
   font-weight: 700;
-  color: var(--color-heading);
-  line-height: 1.4;
+  color: var(--resume-ink);
+  line-height: 1.28;
 }
 
 .timeline-role {
-  font-size: 13px;
-  font-style: italic;
-  color: var(--color-text);
-  margin-top: 2px;
-  line-height: 1.4;
+  font-size: 14.5px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--resume-accent-deep);
+  margin-top: 4px;
+  line-height: 1.38;
 }
 
 .timeline-meta {
-  font-size: 12px;
-  font-style: italic;
-  color: var(--color-text-muted);
-  margin-top: 2px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--resume-warm);
+  margin-top: 4px;
 }
 
 .timeline-sub {
-  font-size: 12.5px;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  margin-top: 3px;
+  font-size: 13.5px;
+  color: var(--resume-muted);
+  line-height: 1.55;
+  margin-top: 4px;
+}
+
+.timeline-advisor {
+  font-size: 13px;
+  color: #7c6154;
+}
+
+.timeline-advisor a {
+  color: inherit;
+  border-bottom: 1px solid rgba(124, 97, 84, 0.35);
+}
+
+.timeline-advisor a:hover,
+.timeline-advisor a:focus {
+  color: var(--resume-warm);
+  border-bottom-color: currentColor;
 }
 
 /* ---------- Entry list (Experience / Honors & Awards) ---------- */
 .entry-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  max-width: 760px;
 }
 
 .entry-card {
-  border: 1px solid var(--color-border);
+  border: 1px solid #dce8e3;
+  border-left: 4px solid var(--resume-accent);
   border-radius: var(--radius-sm);
-  padding: 14px 18px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 8px 24px rgba(36, 49, 58, 0.04);
 }
 
 .entry-org {
-  font-size: 14.5px;
+  font-size: 17px;
   font-weight: 700;
-  color: var(--color-heading);
-  line-height: 1.4;
+  color: var(--resume-ink);
+  line-height: 1.28;
 }
 
 .entry-role {
-  font-size: 13px;
-  font-style: italic;
-  color: var(--color-text);
-  margin-top: 2px;
-  line-height: 1.4;
+  font-size: 14.5px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--resume-accent-deep);
+  margin-top: 4px;
+  line-height: 1.38;
 }
 
 .entry-meta {
-  font-size: 12px;
-  font-style: italic;
-  color: var(--color-text-muted);
-  margin-top: 2px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--resume-warm);
+  margin-top: 4px;
 }
 
 .entry-sub {
-  font-size: 12.5px;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  margin-top: 3px;
+  font-size: 13.5px;
+  color: var(--resume-muted);
+  line-height: 1.55;
+  margin-top: 5px;
+}
+
+.page-view[data-page="skills"] .skill-group {
+  margin-bottom: 26px;
+  max-width: 760px;
+}
+
+.page-view[data-page="skills"] .skill-group-label {
+  margin-bottom: 12px;
+  color: var(--resume-accent-deep);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.page-view[data-page="skills"] .profile-skills-tags {
+  gap: 10px;
+}
+
+.page-view[data-page="skills"] .skill-tag {
+  padding: 7px 13px;
+  border-color: #d4e3dc;
+  border-radius: var(--radius-sm);
+  background: var(--resume-soft);
+  color: var(--resume-ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 /* ---------- Publication Filter ---------- */
@@ -773,24 +925,10 @@ a:focus {
 
 .pub-media img,
 .pub-media video {
-  width: 100%;
+  width: 75%;
   height: auto;
   display: block;
-}
-
-.pub-media-badge {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  z-index: 2;
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
 }
 
 .pub-media-slider .pub-media-slide {
@@ -826,16 +964,16 @@ a:focus {
 }
 
 .pub-media-nav--prev {
-  left: 10px;
+  left: calc(12.5% + 10px);
 }
 
 .pub-media-nav--next {
-  right: 10px;
+  right: calc(12.5% + 10px);
 }
 
 .pub-media-dots {
   position: absolute;
-  right: 12px;
+  right: calc(12.5% + 12px);
   bottom: 12px;
   z-index: 2;
   display: flex;
@@ -911,16 +1049,19 @@ a:focus {
 .authors-toggle:hover { text-decoration: underline; }
 
 .pub-venue {
-  font-size: 13px;
-  color: var(--color-text-muted);
-  font-style: italic;
-  margin-bottom: 4px;
+  font-size: 14.5px;
+  color: var(--color-accent);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 6px;
 }
 
 .pub-venue-note {
-  font-size: 12.5px;
-  color: var(--color-accent);
-  font-style: italic;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+  font-style: normal;
+  line-height: 1.45;
   margin-bottom: 8px;
 }
 
@@ -1002,10 +1143,10 @@ a:focus {
 }
 
 .pub-desc {
-  font-size: 13px;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 6px;
 }
 
 /* ---------- Interests ---------- */
@@ -1047,6 +1188,20 @@ a:focus {
 }
 
 /* ---------- Reviewer / Service ---------- */
+#teaching,
+#mentoring,
+#service,
+#collaborations {
+  margin-top: 34px;
+}
+
+#teaching .section-title,
+#mentoring .section-title,
+#service .section-title,
+#collaborations .section-title {
+  margin-bottom: 14px;
+}
+
 .reviewer-list {
   list-style: none;
   padding: 0;
@@ -1054,7 +1209,7 @@ a:focus {
 
 .reviewer-list li {
   position: relative;
-  padding: 8px 0 8px 20px;
+  padding: 4px 0 4px 20px;
   font-size: 14.5px;
   color: var(--color-text);
 }
@@ -1749,6 +1904,23 @@ a:focus {
   .pub-card {
     flex-direction: column;
     gap: 14px;
+  }
+
+  .pub-media img,
+  .pub-media video {
+    width: 100%;
+  }
+
+  .pub-media-nav--prev {
+    left: 10px;
+  }
+
+  .pub-media-nav--next {
+    right: 10px;
+  }
+
+  .pub-media-dots {
+    right: 12px;
   }
 
   .pub-thumb {

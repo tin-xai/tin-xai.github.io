@@ -41,11 +41,8 @@
           <a href="https://github.com/tin-xai/" class="social-link social-link--icon" title="GitHub"><i class="fab fa-github"></i></a>
           
           <!-- <a href="https://substack.com/@ngthanhtinqn" class="social-link social-link--icon" title="Substack"><i class="fas fa-rss"></i></a> -->
-          <a href="https://wandb.ai/tinai" class="social-link social-link--icon" title="W&B"><i class="fas fa-chart-line"></i></a>
-          <a href="https://huggingface.co/ttn0011" class="social-link social-link--icon" title="Hugging Face">🤗</a>
-          <a href="https://www.youtube.com/@tinkevinnguyen" class="social-link social-link--icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
-        
+
         <div class="resume-quicklinks">
           <button type="button" class="resume-quick-btn is-active" data-panel="home"><span class="resume-quick-icon">🏠</span> Home</button>
           <button type="button" class="resume-quick-btn" data-panel="education"><span class="resume-quick-icon">🎓</span> Education</button>
@@ -171,7 +168,6 @@
         <!-- Paper 1: PageGuide -->
         <div class="pub-card" data-featured="true">
           <div class="pub-media pub-media-slider">
-            <span class="pub-media-badge">Arxiv, 2026</span>
             <img class="pub-media-slide is-active" src="assets/papers/pageguide/pageguide_p2.png" alt="PageGuide paper figure 2">
             <img class="pub-media-slide" src="assets/papers/pageguide/pageguide_p1.png" alt="PageGuide paper figure 1">
             <button type="button" class="pub-media-nav pub-media-nav--prev" data-dir="-1" aria-label="Previous image">&lsaquo;</button>
@@ -190,7 +186,7 @@
               <strong>Tin Nguyen</strong>, Thang T. Truong, Runtao Zhou, Trung Bui, Chirag Agarwal, Anh Totti Nguyen
             </div>
             <div class="pub-venue">Arxiv, 2026</div>
-            <div class="pub-desc">PageGuide is a browser extension that acts as an in-page navigation agent: given a user's question, it locates the supporting evidence on the current webpage and highlights exactly where the answer comes from, instead of leaving the user to skim the whole page. We found that this agent improves the users verification up to 15%, post-survey questions show that users prefer evidence to verify agent's answer rather than plain text answers from non-grounding web agents (Claude Ext, Gemini Ext, etc).</div>
+            <div class="pub-desc">PageGuide is a browser extension that acts as an in-page navigation agent: given a user's question, it locates the supporting evidence on the current webpage (DOM or non-DOM elements) and highlights exactly where the answer comes from, instead of leaving the user to skim the whole page.</div>
             <div class="pub-links">
               <a href="https://pageguide.github.io/" class="pub-link">Project Page</a>
               <a href="https://arxiv.org/abs/2604.23772" class="pub-link">Arxiv</a>
@@ -202,7 +198,6 @@
         <!-- Paper 3: HoT -->
         <div class="pub-card" data-featured="true">
           <div class="pub-media pub-media-slider">
-            <span class="pub-media-badge">TMLR, 2026</span>
             <img class="pub-media-slide is-active" src="assets/papers/hot/teaser_cot_hot.png" alt="HoT paper figure 1">
             <img class="pub-media-slide" src="assets/papers/hot/teaser_cot_hot_2.png" alt="HoT paper figure 2">
             <button type="button" class="pub-media-nav pub-media-nav--prev" data-dir="-1" aria-label="Previous image">&lsaquo;</button>
@@ -225,7 +220,7 @@
             <div class="pub-venue">TMLR, 2026</div>
             <div class="pub-venue-note">Also accepted at NeurIPS 2025 Workshop Multimodal Algorithmic Reasoning (MAR) —
               Oral</div>
-            <div class="pub-desc">HoT reformats an LLM's chain of thought so every claim is directly highlighted and linked back to the exact supporting facts in the input, using matched color-coded spans between the reasoning and the source text. This lets a reader quickly check whether the model's reasoning is actually grounded in the input rather than hallucinated, and the paper shows it improves both faithfulness and human trust compared to standard chain-of-thought prompting.</div>
+            <div class="pub-desc">Highlighted Chain of Thought (HoT) outputs XML-style evidence tags in each reasoning step, linking conclusions to specific input spans so users can trace <b>why</b> an answer is produced.</div>
             <div class="pub-links">
               <a href="https://highlightedchainofthought.github.io/" class="pub-link">Website</a>
               <a href="https://github.com/anguyen8/hot" class="pub-link">Code</a>
@@ -237,7 +232,6 @@
         <!-- Paper 4: PEEB -->
         <div class="pub-card" data-featured="true">
           <div class="pub-media">
-            <span class="pub-media-badge">NAACL, 2024</span>
             <img src="assets/papers/peeb/peeb_arc.png" alt="PEEB paper figure">
           </div>
           <div class="pub-content">
@@ -252,8 +246,8 @@
             <div class="pub-authors">
               <strong>Thang Pham*, Peijie Chen*, Tin Nguyen*</strong>, Seunghyun Yoon, Trung Bui, Anh Nguyen
             </div>
-            <div class="pub-venue">NAACL, 2024 Findings</div>
-            <div class="pub-desc">PEEB is a part-based, interpretable-by-design image classifier that predicts an object's class by first describing its visible parts in natural language (e.g., wing color, beak shape) and matching those descriptions against a text-conditioned part detector. Because the classification bottleneck is human-readable text, users can inspect exactly which part attributes drove a prediction and edit the class descriptions to correct or adapt the model without retraining.</div>
+            <div class="pub-venue">NAACL, 2024</div>
+            <div class="pub-desc">PEEB is a part-based, interpretable-by-design image classifier that predicts an object's class by first describing its visible parts in natural language (e.g., wing color, beak shape) and matching those descriptions against a text-conditioned part detector. As a result, users can inspect exactly which part attributes drove a prediction and edit the class descriptions to correct or adapt the model without retraining.</div>
             <div class="pub-links">
               <a href="https://github.com/anguyen8/peeb" class="pub-link">Code</a>
               <a href="https://arxiv.org/pdf/2403.05297.pdf" class="pub-link">Paper</a>
@@ -266,7 +260,6 @@
         <!-- Paper 5: VizDoom -->
         <div class="pub-card" data-featured="true">
           <div class="pub-media">
-            <span class="pub-media-badge">KBS, 2023</span>
             <img src="assets/papers/vizdoom/vizdoom_instruction.gif" alt="VizDoom navigation figure">
           </div>
           <div class="pub-content">
@@ -281,7 +274,7 @@
               <strong>Thanh Tin Nguyen*</strong>, <strong>Anh H. Vo*</strong>, Soo-Mi Choi, Yong-Guk Kim
             </div>
             <div class="pub-venue">Knowledge-based Systems (KBS), Jul 4, 2023</div>
-            <div class="pub-desc">This work studies vision-and-language navigation in 3D environments built on VizDoom, where an agent must follow a natural-language instruction to reach a target location. The proposed coarse-to-fine fusion combines instruction and visual features at multiple stages, first aligning coarse landmarks mentioned in the instruction and then refining fine-grained action decisions, which improves navigation success over single-stage fusion baselines.</div>
+            <div class="pub-desc">This work studies vision-and-language navigation in 3D environments built on VizDoom, where an agent must follow a natural-language instruction to reach a target location.</div>
             <div class="pub-links">
               <a href="https://youtu.be/rwODCJFM1SY" class="pub-link">Video</a>
               <a href="https://github.com/tin-xai/AE_VLN_Vizdoom" class="pub-link">Code</a>
@@ -293,7 +286,6 @@
         <!-- Other: VBVR -->
         <div class="pub-card" data-featured="false">
           <div class="pub-media">
-            <span class="pub-media-badge">ICML, 2026</span>
             <video src="assets/papers/vbvr/vbvr.mp4" autoplay loop muted playsinline></video>
           </div>
           <div class="pub-content">
@@ -317,10 +309,9 @@
 
         <!-- Other: Korean Patent -->
         <div class="pub-card" data-featured="false">
-          <div class="pub-media">
-            <span class="pub-media-badge">KR Patent</span>
+          <!-- <div class="pub-media">
             <img src="assets/papers/vizdoom/vizdoom_instruction.gif" alt="Korean patent figure">
-          </div>
+          </div> -->
           <div class="pub-content">
             <div class="pub-title">
               <a href="data/IP-2024-133-KR_등록증.pdf">Coarse-to-Fine Fusion Method and Apparatus for Language-Command-Based Virtual Space Navigation (Korean Patent)</a>
@@ -398,7 +389,7 @@
     </section>
 
     <!-- ========== Collaborations ========== -->
-    <section class="section fade-in" id="collaborations">
+    <!-- <section class="section fade-in" id="collaborations">
       <h2 class="section-title">Collaborations</h2>
       <div class="collab-grid">
         <div class="collab-item">
@@ -414,7 +405,7 @@
           <span>Adobe</span>
         </div>
       </div>
-    </section>
+    </section> -->
     </div>
     <!-- ========== Education ========== -->
     <div class="page-view" data-page="education">
@@ -427,8 +418,9 @@
             <div class="timeline-org">Auburn University</div>
             <div class="timeline-role">Ph.D. in Computer Science and Engineering</div>
             <div class="timeline-meta">AL, U.S. &middot; Aug. 2022 &ndash; present</div>
-            <div class="timeline-sub">Advisor: Anh (Totti) Nguyen</div>
-            <div class="timeline-sub">Teaching Assistant: Formal Languages, Machine Learning, Security</div>
+            <div class="timeline-sub timeline-advisor">Advisor: <a href="https://anhnguyen.me/">Anh (Totti) Nguyen</a></div>
+            <div class="timeline-sub">Research: Explainable AI and Human-AI Interaction</div>
+            <div class="timeline-sub">Teaching Assistant: Formal Languages, Machine Learning, Secure Software Process</div>
           </div>
         </div>
 
@@ -438,7 +430,8 @@
             <div class="timeline-org">Sejong University</div>
             <div class="timeline-role">M.Sc. in Computer Science and Engineering</div>
             <div class="timeline-meta">Seoul, S. Korea &middot; 2020 &ndash; 2022</div>
-            <div class="timeline-sub">Advisor: Kim Yong-Guk</div>
+            <div class="timeline-sub timeline-advisor">Advisor: Kim Yong-Guk</div>
+            <div class="timeline-sub">Research: Robot Navigation</div>
           </div>
         </div>
 
@@ -448,7 +441,8 @@
             <div class="timeline-org">University of Science</div>
             <div class="timeline-role">B.A. in Computer Science and Engineering</div>
             <div class="timeline-meta">Ho Chi Minh, Vietnam &middot; 2015 &ndash; 2019</div>
-            <div class="timeline-sub">Advisor: Ngoc Quoc Ly</div>
+            <div class="timeline-sub timeline-advisor">Advisor: Ngoc Quoc Ly</div>
+            <div class="timeline-sub">Research: Computer Vision and Robotics</div>
           </div>
         </div>
       </div>
@@ -589,6 +583,15 @@
       </section>
     </span> -->
 
+      </div>
+    </div>
+
+    <div class="elsewhere-online" aria-label="Elsewhere online links">
+      <span class="elsewhere-online-label">Elsewhere Online</span>
+      <div class="elsewhere-online-links">
+        <a href="https://wandb.ai/tinai" class="elsewhere-online-link" title="W&B" aria-label="W&B"><i class="fas fa-chart-line"></i></a>
+        <a href="https://huggingface.co/ttn0011" class="elsewhere-online-link" title="Hugging Face" aria-label="Hugging Face">🤗</a>
+        <a href="https://www.youtube.com/@tinkevinnguyen" class="elsewhere-online-link" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
   </div>
