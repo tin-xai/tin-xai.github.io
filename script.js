@@ -39,48 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilter('favorites');
 });
 
-// Resume card sliders (Education / Experience / Honors & Awards)
+// Main-panel page switcher (Home / Education / Work Experience / Honors & Awards / Skills)
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.resume-slider').forEach(slider => {
-        const slides = Array.from(slider.querySelectorAll('.resume-slide'));
-        const nav = slider.nextElementSibling;
-        if (!slides.length || !nav || !nav.classList.contains('resume-slider-nav')) return;
+    const mainColumn = document.querySelector('.main-column');
+    const quickBtns = document.querySelectorAll('.resume-quick-btn');
+    if (!mainColumn || !quickBtns.length) return;
 
-        if (slides.length <= 1) {
-            nav.classList.add('is-hidden');
-            return;
-        }
+    const views = mainColumn.querySelectorAll(':scope > .page-view');
 
-        const dotsWrap = nav.querySelector('.resume-dots');
-        const prevBtn = nav.querySelector('[data-dir="-1"]');
-        const nextBtn = nav.querySelector('[data-dir="1"]');
-        let index = slides.findIndex(s => s.classList.contains('is-active'));
-        if (index < 0) index = 0;
+    function showPage(name) {
+        views.forEach(v => v.classList.toggle('is-active', v.dataset.page === name));
+        quickBtns.forEach(b => b.classList.toggle('is-active', b.dataset.panel === name));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        const dots = slides.map((_, i) => {
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = 'resume-dot';
-            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-            dot.addEventListener('click', () => goTo(i));
-            dotsWrap.appendChild(dot);
-            return dot;
-        });
-
-        function update() {
-            slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
-            dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
-        }
-
-        function goTo(i) {
-            index = (i + slides.length) % slides.length;
-            update();
-        }
-
-        prevBtn.addEventListener('click', () => goTo(index - 1));
-        nextBtn.addEventListener('click', () => goTo(index + 1));
-
-        update();
+    quickBtns.forEach(btn => {
+        btn.addEventListener('click', () => showPage(btn.dataset.panel));
     });
 });
 

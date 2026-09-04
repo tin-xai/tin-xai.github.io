@@ -14,11 +14,11 @@
   --color-text: #2d3748;
   --color-text-muted: #64748b;
   --color-heading: #1a1a2e;
-  --color-accent: #4a6cf7;
-  --color-accent-hover: #3b5de7;
-  --color-highlight: #f09228;
+  --color-accent: #2c4a80;
+  --color-accent-hover: #1e3766;
+  --color-highlight: #e8720e;
   --color-border: #e2e8f0;
-  --color-card-shadow: rgba(74, 108, 247, 0.06);
+  --color-card-shadow: rgba(44, 74, 128, 0.07);
   --color-tag-red-bg: #fef2f2;
   --color-tag-red-text: #b91c1c;
   --color-tag-yellow-bg: #fffbeb;
@@ -148,10 +148,45 @@ a:focus {
   color: var(--color-accent);
 }
 
-.profile-skills {
+.resume-quicklinks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid var(--color-border);
+}
+
+.resume-quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.resume-quick-btn:hover,
+.resume-quick-btn:focus-visible,
+.resume-quick-btn.is-active {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.resume-quick-icon {
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .profile-skills-label {
@@ -166,18 +201,35 @@ a:focus {
 .profile-skills-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 8px;
 }
 
 .skill-tag {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
-  font-size: 10.5px;
+  font-size: 13px;
   font-weight: 500;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
+}
+
+.skill-group {
+  margin-bottom: 24px;
+}
+
+.skill-group:last-child {
+  margin-bottom: 0;
+}
+
+.skill-group-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-accent);
+  margin-bottom: 10px;
 }
 
 .profile-photo-wrapper .social-links {
@@ -367,7 +419,7 @@ a:focus {
   color: #fff;
   border-color: var(--color-accent);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.25);
+  box-shadow: 0 4px 12px rgba(44, 74, 128, 0.25);
 }
 
 .social-link i {
@@ -406,148 +458,129 @@ a:focus {
   display: inline-block;
 }
 
-/* ---------- Resume Card (Education / Experience / Honors) ---------- */
-.resume-card {
-  display: flex;
-  gap: 28px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 28px 32px;
-}
-
-.resume-col {
-  flex: 1;
-  min-width: 0;
-}
-
-.resume-heading {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-heading);
-  margin-bottom: 14px;
-}
-
-.resume-entry {
-  margin-bottom: 18px;
-}
-
-.resume-entry:last-child {
-  margin-bottom: 0;
-}
-
-.resume-slider {
-  position: relative;
-}
-
-.resume-slide {
+/* ---------- Page Views (Home / Education / Experience / Honors / Skills) ---------- */
+.page-view {
   display: none;
 }
 
-.resume-slide.is-active {
+.page-view.is-active {
   display: block;
-  margin-bottom: 0;
-  animation: resumeFade 0.25s ease;
+  animation: pageViewIn 0.25s ease;
 }
 
-@keyframes resumeFade {
+@keyframes pageViewIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
 }
 
-.resume-slider-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 16px;
+/* ---------- Timeline (Education) ---------- */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 16px;
 }
 
-.resume-slider-nav.is-hidden {
-  display: none;
+.timeline-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
 }
 
-.resume-nav-btn {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.timeline-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  color: var(--color-text-muted);
-  font-size: 15px;
-  line-height: 1;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.resume-nav-btn:hover {
   background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
+  flex-shrink: 0;
 }
 
-.resume-dots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.resume-dot {
-  width: 6px;
-  height: 6px;
-  padding: 0;
-  border: none;
-  border-radius: var(--radius-full);
+.timeline-line {
+  width: 2px;
+  flex: 1;
+  min-height: 24px;
   background: var(--color-border);
-  cursor: pointer;
-  transition: all var(--transition);
+  margin-top: 4px;
 }
 
-.resume-dot.is-active {
-  width: 16px;
-  background: var(--color-accent);
+.timeline-info {
+  padding-bottom: 20px;
 }
 
-.resume-org {
-  font-size: 13.5px;
+.timeline-org {
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--color-heading);
   line-height: 1.4;
 }
 
-.resume-icon {
-  margin-right: 2px;
-}
-
-.resume-role {
-  font-size: 12.5px;
+.timeline-role {
+  font-size: 13px;
   font-style: italic;
   color: var(--color-text);
   margin-top: 2px;
   line-height: 1.4;
 }
 
-.resume-meta {
-  font-size: 11px;
+.timeline-meta {
+  font-size: 12px;
   font-style: italic;
   color: var(--color-text-muted);
   margin-top: 2px;
 }
 
-.resume-sub {
-  font-size: 11.5px;
+.timeline-sub {
+  font-size: 12.5px;
   color: var(--color-text-muted);
-  line-height: 1.45;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+
+/* ---------- Entry list (Experience / Honors & Awards) ---------- */
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.entry-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+}
+
+.entry-org {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.4;
+}
+
+.entry-role {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-text);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.entry-meta {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.entry-sub {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
   margin-top: 3px;
 }
 
@@ -619,7 +652,7 @@ a:focus {
 }
 
 .research-quote:hover {
-  background: rgba(74, 108, 247, 0.03);
+  background: rgba(44, 74, 128, 0.03);
 }
 
 .quote-highlight {
@@ -1201,7 +1234,7 @@ a:focus {
   border-radius: var(--radius-full);
   font-size: 11.5px;
   font-weight: 500;
-  background: rgba(74, 108, 247, 0.08);
+  background: rgba(44, 74, 128, 0.08);
   color: var(--color-accent);
 }
 
@@ -1525,7 +1558,7 @@ a:focus {
   border-radius: var(--radius-full);
   font-size: 11.5px;
   font-weight: 500;
-  background: rgba(74, 108, 247, 0.08);
+  background: rgba(44, 74, 128, 0.08);
   color: var(--color-accent);
 }
 
@@ -1589,7 +1622,7 @@ a:focus {
   background: var(--color-accent);
   color: #fff;
   border-color: var(--color-accent);
-  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.25);
+  box-shadow: 0 4px 12px rgba(44, 74, 128, 0.25);
 }
 
 .inspo-panel {
@@ -1698,12 +1731,6 @@ a:focus {
   .profile-photo-wrapper {
     width: auto;
     align-items: center;
-  }
-
-  .resume-card {
-    flex-direction: column;
-    gap: 24px;
-    padding: 22px 20px;
   }
 
   .profile-photo-wrapper > a {
