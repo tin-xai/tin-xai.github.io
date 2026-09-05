@@ -178,9 +178,9 @@ a:focus {
 .resume-quick-btn:hover,
 .resume-quick-btn:focus-visible,
 .resume-quick-btn.is-active {
-  background: #2f7d6d;
+  background: #293B61;
   color: #fff;
-  border-color: #2f7d6d;
+  border-color: #293B61;
   transform: translateY(-1px);
 }
 
@@ -270,17 +270,17 @@ a:focus {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #111;
+  background: #293B61;
   color: #fff;
   font-size: 15px;
   justify-content: center;
-  border: none;
+  border: 1px solid #293B61;
 }
 
 .profile-photo-wrapper .social-link--icon:hover {
-  background: #333;
+  background: #203050;
   color: #fff;
-  border-color: transparent;
+  border-color: #203050;
   box-shadow: none;
   transform: translateY(-1px);
 }
@@ -482,6 +482,7 @@ a:focus {
   font-size: 14.5px;
   line-height: 1.65;
   color: #78350f;
+  text-align: center;
   margin-top: 8px;
   margin-bottom: 0;
 }
