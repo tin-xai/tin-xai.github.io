@@ -144,6 +144,11 @@ a:focus {
   word-break: break-all;
 }
 
+.profile-emails i {
+  margin-right: 5px;
+  vertical-align: -1px;
+}
+
 .profile-emails a:hover {
   color: var(--color-accent);
 }
