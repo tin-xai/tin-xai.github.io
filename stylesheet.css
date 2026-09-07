@@ -536,7 +536,8 @@ a:focus {
 .page-view[data-page="education"],
 .page-view[data-page="experience"],
 .page-view[data-page="honors"],
-.page-view[data-page="skills"] {
+.page-view[data-page="skills"],
+.page-view[data-page="projects"] {
   --resume-ink: #24313a;
   --resume-muted: #6d7b83;
   --resume-soft: #eef4f1;
@@ -552,7 +553,8 @@ a:focus {
 .page-view[data-page="education"] .section-title,
 .page-view[data-page="experience"] .section-title,
 .page-view[data-page="honors"] .section-title,
-.page-view[data-page="skills"] .section-title {
+.page-view[data-page="skills"] .section-title,
+.page-view[data-page="projects"] .section-title {
   position: relative;
   margin-bottom: 28px;
   padding-bottom: 8px;
@@ -567,7 +569,8 @@ a:focus {
 .page-view[data-page="education"] .section-title::after,
 .page-view[data-page="experience"] .section-title::after,
 .page-view[data-page="honors"] .section-title::after,
-.page-view[data-page="skills"] .section-title::after {
+.page-view[data-page="skills"] .section-title::after,
+.page-view[data-page="projects"] .section-title::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1660,6 +1663,7 @@ a:focus {
 
 .project-card {
   display: flex;
+  flex-direction: column;
   gap: 20px;
   padding: 24px;
   border-radius: var(--radius-md);
@@ -1672,6 +1676,16 @@ a:focus {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--color-accent);
+}
+
+.project-banner {
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
 }
 
 .project-icon {

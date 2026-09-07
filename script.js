@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilter('favorites');
 });
 
-// Main-panel page switcher (Home / Education / Work Experience / Honors & Awards / Skills)
+// Main-panel page switcher (Home / Education / Work Experience / Honors & Awards / Skills / Projects)
 document.addEventListener('DOMContentLoaded', () => {
     const mainColumn = document.querySelector('.main-column');
-    const quickBtns = document.querySelectorAll('.resume-quick-btn');
+    const quickBtns = document.querySelectorAll('.resume-quick-btn[data-panel]');
     if (!mainColumn || !quickBtns.length) return;
 
     const views = mainColumn.querySelectorAll(':scope > .page-view');
