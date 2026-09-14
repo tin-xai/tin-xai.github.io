@@ -176,7 +176,9 @@ a:focus {
   font-size: 13px;
   font-weight: 600;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
+  box-sizing: border-box;
   transition: all var(--transition);
 }
 
@@ -269,6 +271,32 @@ a:focus {
   border-color: var(--color-text);
   box-shadow: none;
   transform: none;
+}
+
+.education-statement-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.research-statement-link {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1.5px solid var(--color-text);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.research-statement-link:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
 }
 
 .profile-photo-wrapper .social-link--icon {
