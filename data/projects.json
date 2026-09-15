@@ -25,5 +25,30 @@
         "links": {
             "github": "https://github.com/tin-xai/Argue.ai"
         }
+    },
+    {
+        "slug": "hci-stats",
+        "title": "Statistics in HCI",
+        "description": "A collection of references and notes on the statistical methods commonly used in HCI research.",
+        "tags": [
+            "Statistics",
+            "HCI",
+            "Research"
+        ],
+        "links": {},
+        "materials": [
+            {
+                "label": "Yatani: Statistical Methods in HCI",
+                "url": "https://yatani.jp/teaching/doku.php?id=hcistats:start"
+            },
+            {
+                "label": "How to Report an F-Statistic",
+                "url": "https://www.yorku.ca/mack/RN-HowToReportAnFStatistic.html"
+            },
+            {
+                "label": "Penn State STAT 502: Analysis of Variance and Design of Experiments",
+                "url": "https://online.stat.psu.edu/stat502/"
+            }
+        ]
     }
 ]
