@@ -50,22 +50,5 @@
                 "url": "https://online.stat.psu.edu/stat502/"
             }
         ]
-    },
-    {
-        "slug": "hri-course",
-        "title": "Human-Robot Interaction",
-        "description": "Course materials and notes on the algorithmic foundations of human-robot interaction.",
-        "tags": [
-            "HRI",
-            "Robotics",
-            "Course"
-        ],
-        "links": {},
-        "materials": [
-            {
-                "label": "Bajcsy: Human-Robot Interaction",
-                "url": "https://abajcsy.github.io/human-robot-interaction/"
-            }
-        ]
     }
 ]
