@@ -157,6 +157,8 @@
         <span class="pub-filter">
           <a class="pub-filter-link active" data-filter="favorites" href="#">my favorites (<span id="count-favorites"></span>)</a>
           <span class="pub-filter-sep">|</span>
+          <a class="pub-filter-link" data-filter="patents" href="#">patents (<span id="count-patents"></span>)</a>
+          <span class="pub-filter-sep">|</span>
           <a class="pub-filter-link" data-filter="others" href="#">others (<span id="count-all"></span>)</a>
         </span>
       </h2>
@@ -305,8 +307,28 @@
           </div>
         </div>
 
-        <!-- Other: Korean Patent -->
+        <!-- Other: MOT -->
         <div class="pub-card" data-featured="false">
+          <div class="pub-media">
+            <img src="assets/papers/mot/robot_demo.gif" alt="Moving Object Tracking framework figure">
+          </div>
+          <div class="pub-content">
+            <div class="pub-title">
+              <a href="https://thesai.org/Publications/ViewPaper?Volume=11&Issue=4&Code=IJACSA&SerialNo=6">A New Framework of Moving Object Tracking based on Object Detection-Tracking with Removal of Moving Features</a>
+            </div>
+            <div class="pub-authors">
+              Ly Quoc Ngoc, <strong>Nguyen Thanh Tin</strong>, Le Bao Tuan
+            </div>
+            <div class="pub-venue">International Journal of Advanced Computer Science and Applications (IJACSA), Vol. 11, No. 4, 2020</div>
+            <div class="pub-links">
+              <a href="https://thesai.org/Publications/ViewPaper?Volume=11&Issue=4&Code=IJACSA&SerialNo=6" class="pub-link">Paper</a>
+              <a href="https://dx.doi.org/10.14569/IJACSA.2020.0110406" class="pub-link">DOI</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Patent: Korean Patent -->
+        <div class="pub-card" data-featured="false" data-patent="true">
           <!-- <div class="pub-media">
             <img src="assets/papers/vizdoom/vizdoom_instruction.gif" alt="Korean patent figure">
           </div> -->
@@ -357,25 +379,7 @@
           </div>
         </div>
 
-        <!-- Other: MOT -->
-        <div class="pub-card" data-featured="false">
-          <div class="pub-media">
-            <img src="assets/papers/mot/mot.png" alt="Moving Object Tracking framework figure">
-          </div>
-          <div class="pub-content">
-            <div class="pub-title">
-              <a href="https://thesai.org/Publications/ViewPaper?Volume=11&Issue=4&Code=IJACSA&SerialNo=6">A New Framework of Moving Object Tracking based on Object Detection-Tracking with Removal of Moving Features</a>
-            </div>
-            <div class="pub-authors">
-              Ly Quoc Ngoc, <strong>Nguyen Thanh Tin</strong>, Le Bao Tuan
-            </div>
-            <div class="pub-venue">International Journal of Advanced Computer Science and Applications (IJACSA), Vol. 11, No. 4, 2020</div>
-            <div class="pub-links">
-              <a href="https://thesai.org/Publications/ViewPaper?Volume=11&Issue=4&Code=IJACSA&SerialNo=6" class="pub-link">Paper</a>
-              <a href="https://dx.doi.org/10.14569/IJACSA.2020.0110406" class="pub-link">DOI</a>
-            </div>
-          </div>
-        </div>
+        
 
       </div>
     </section>
@@ -521,6 +525,12 @@
           <div class="entry-sub">Tinker &middot; Awarded $5,000 for compute/API credits</div>
         </div>
 
+        <div class="entry-card entry-card--highlight">
+          <div class="entry-org">Korean Patent Registration <span class="entry-badge">&#9733; Patent</span></div>
+          <div class="entry-meta">Jun. 2026</div>
+          <div class="entry-sub">Ministry of Intellectual Property, Republic of Korea &middot; Patent No. 10-2979119, <a href="data/IP-2024-133-KR_등록증.pdf">Coarse-to-Fine Fusion Method and Apparatus for Language-Command-Based Virtual Space Navigation</a></div>
+        </div>
+
         <div class="entry-card">
           <div class="entry-org">GSC Travel Fellowship</div>
           <div class="entry-meta">Dec. 2025</div>
@@ -550,6 +560,7 @@
         <div class="profile-skills-tags">
           <span class="skill-tag">Python</span>
           <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
           <span class="skill-tag">HTML/CSS</span>
           <span class="skill-tag">C/C++</span>
           <span class="skill-tag">R</span>
@@ -562,7 +573,11 @@
           <span class="skill-tag">LLMs</span>
           <span class="skill-tag">VLMs</span>
           <span class="skill-tag">AI Agents</span>
+          <span class="skill-tag">RAG</span>
           <span class="skill-tag">Agentic RAG</span>
+          <span class="skill-tag">GraphRAG</span>
+          <span class="skill-tag">Browser Harness</span>
+          <span class="skill-tag">Coding Harness</span>
         </div>
       </div>
 
@@ -571,17 +586,55 @@
         <div class="profile-skills-tags">
           <span class="skill-tag">PyTorch</span>
           <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Hugging Face</span>
           <span class="skill-tag">vLLM</span>
           <span class="skill-tag">LangChain</span>
           <span class="skill-tag">LangGraph</span>
           <span class="skill-tag">Tinker</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">React Native</span>
+          <span class="skill-tag">Three.js</span>
         </div>
       </div>
 
       <div class="skill-group">
-        <div class="skill-group-label">Database &amp; Platforms</div>
+        <div class="skill-group-label">Robotics</div>
         <div class="profile-skills-tags">
+          <span class="skill-tag">ROS</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Databases &amp; Vector Stores</div>
+        <div class="profile-skills-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">SQLite</span>
           <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">pgvector</span>
+          <span class="skill-tag">Pinecone</span>
+          <span class="skill-tag">Qdrant</span>
+          <span class="skill-tag">Neo4j</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Infrastructure &amp; DevOps</div>
+        <div class="profile-skills-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">RabbitMQ</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Developer Tools</div>
+        <div class="profile-skills-tags">
+          <span class="skill-tag">Vim / Neovim</span>
+          <span class="skill-tag">WezTerm</span>
+          <span class="skill-tag">herdr</span>
+          <span class="skill-tag">hunk</span>
         </div>
       </div>
     </div>

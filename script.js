@@ -11,20 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.pub-card');
     const links = document.querySelectorAll('.pub-filter-link');
     const countFav = document.getElementById('count-favorites');
+    const countPatents = document.getElementById('count-patents');
     const countAll = document.getElementById('count-all');
 
     if (!links.length) return;
 
-    const favCount = [...cards].filter(c => c.dataset.featured === 'true').length;
-    const otherCount = [...cards].filter(c => c.dataset.featured !== 'true').length;
-    if (countFav) countFav.textContent = favCount;
-    if (countAll) countAll.textContent = otherCount;
+    // Each card belongs to exactly one tab: patents, favorites, or others.
+    const categoryOf = card =>
+        card.dataset.patent === 'true' ? 'patents'
+        : card.dataset.featured === 'true' ? 'favorites'
+        : 'others';
+    const countOf = cat => [...cards].filter(c => categoryOf(c) === cat).length;
+    if (countFav) countFav.textContent = countOf('favorites');
+    if (countPatents) countPatents.textContent = countOf('patents');
+    if (countAll) countAll.textContent = countOf('others');
 
     function applyFilter(filter) {
         cards.forEach(card => {
-            const isFav = card.dataset.featured === 'true';
-            const show = filter === 'favorites' ? isFav : !isFav;
-            card.style.display = show ? '' : 'none';
+            card.style.display = categoryOf(card) === filter ? '' : 'none';
         });
         links.forEach(l => l.classList.toggle('active', l.dataset.filter === filter));
     }
