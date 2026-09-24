@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilter('favorites');
 });
 
-// Main-panel page switcher (Home / Education / Work Experience / Honors & Awards / Skills / Projects)
+// Main-panel page switcher (Home / Education / Work Experience / Honors & Awards / Skills / Projects / Resources)
 document.addEventListener('DOMContentLoaded', () => {
     const mainColumn = document.querySelector('.main-column');
     const quickBtns = document.querySelectorAll('.resume-quick-btn[data-panel]');
