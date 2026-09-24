@@ -224,6 +224,18 @@ a:focus {
   color: var(--color-text-muted);
 }
 
+a.skill-tag-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+a.skill-tag-link:hover,
+.page-view[data-page="skills"] a.skill-tag-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 .skill-icon {
   width: 14px;
   height: 14px;
