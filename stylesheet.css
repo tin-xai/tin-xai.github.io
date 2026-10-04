@@ -556,6 +556,18 @@ a.skill-tag-link:hover,
   color: #9a3412;
 }
 
+.profile-news {
+  margin: 12px 0 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.profile-news b {
+  color: var(--color-heading);
+}
+
 /* ---------- Section ---------- */
 .section {
   margin-top: 48px;
@@ -796,6 +808,20 @@ a.skill-tag-link:hover,
   color: var(--resume-muted);
   line-height: 1.55;
   margin-top: 5px;
+}
+
+.award-photo-link {
+  display: block;
+  margin-top: 12px;
+  max-width: 520px;
+}
+
+.award-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e5c7b2;
 }
 
 .entry-bullets {
