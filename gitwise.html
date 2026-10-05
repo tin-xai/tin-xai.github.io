@@ -50,6 +50,18 @@
     .example code, .quick-command { color: #d4e6ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
     .example code { display: block; margin-bottom: 6px; font-size: .9rem; }
     .example span { color: var(--muted); font-size: .82rem; line-height: 1.45; }
+    .practice-panel { margin-top: 28px; padding: 23px 25px; border: 1px solid #3d4854; border-radius: 7px; background: linear-gradient(135deg, rgba(34, 45, 57, .96), rgba(27, 33, 40, .96)); }
+    .practice-panel h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    .practice-goal { margin: 0 0 15px; color: var(--muted); line-height: 1.6; }
+    .practice-form { display: flex; gap: 9px; }
+    .practice-input { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid #4b5866; border-radius: 5px; outline: none; background: #11161b; color: #d4e6ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .practice-input:focus { border-color: var(--accent); }
+    .practice-form button, .hint-button { padding: 9px 13px; border: 1px solid #4b5866; border-radius: 5px; background: #27313b; color: var(--text); cursor: pointer; }
+    .practice-form button:hover, .hint-button:hover { border-color: var(--accent); color: var(--accent); }
+    .practice-feedback { min-height: 1.5em; margin: 11px 0 0; color: var(--muted); }
+    .practice-feedback.success { color: var(--green); }
+    .practice-feedback.error { color: #ffadad; }
+    .hint-button { margin-top: 5px; font-size: .82rem; }
     .lesson-section { margin-top: 28px; padding: 23px 25px; border: 1px solid #3d4854; border-radius: 7px; background: rgba(32, 38, 45, .78); }
     .lesson-section h2 { margin: 0 0 12px; font-size: 1.1rem; }
     .lesson-section p { margin: 0; color: var(--muted); line-height: 1.7; }
@@ -92,6 +104,16 @@
         <h1 id="lessonTitle"></h1>
         <p class="intro" id="intro"></p>
         <div class="command-examples" id="commandExamples"></div>
+        <section class="practice-panel">
+          <h2>Practice challenge</h2>
+          <p class="practice-goal" id="practiceGoal"></p>
+          <form class="practice-form" id="practiceForm">
+            <input class="practice-input" id="practiceInput" autocomplete="off" spellcheck="false" placeholder="Type a Git command…" aria-label="Git command answer">
+            <button type="submit">Check answer</button>
+          </form>
+          <p class="practice-feedback" id="practiceFeedback" role="status" aria-live="polite"></p>
+          <button class="hint-button" id="practiceHint" type="button">Show hint</button>
+        </section>
         <section class="lesson-section"><h2>When to use it</h2><p id="whenToUse"></p><ul class="checklist" id="checklist"></ul></section>
         <section class="notes"><h2>Practical note</h2><p id="notes"></p></section>
         <div class="lesson-actions"><button id="previousLesson">← Previous lesson</button><button class="complete" id="markComplete">Mark lesson complete ✓</button><button id="nextLesson">Next lesson →</button></div>
@@ -112,6 +134,19 @@
       { id: 'worktrees', group: '08 · Parallel work', title: 'Worktrees', intro: 'Work on multiple branches at once in separate directories.', when: 'Use worktrees when you need to keep a long-running feature open while reviewing a pull request, testing a hotfix, or running another branch locally.', checklist: ['Give each worktree a descriptive sibling directory.', 'Use one branch per worktree.', 'Remove unused worktrees when the task is finished.'], notes: 'Worktrees avoid repeated stashing and checkout churn while sharing the same Git object database.', examples: [['git worktree add ../project-hotfix hotfix', 'Create a second checkout'], ['git worktree list', 'See active worktrees'], ['git worktree remove ../project-hotfix', 'Remove a worktree']] },
       { id: 'tags', group: '09 · Releases', title: 'Tags', intro: 'Mark stable versions and release points so they can be found again.', when: 'Use annotated tags for releases, published versions, and other durable milestones.', checklist: ['Tag the exact commit that was tested and released.', 'Use a consistent version naming scheme.', 'Push tags deliberately when they should be visible to collaborators.'], notes: 'Unlike branches, release tags should not move. Create a new tag for a new release.', examples: [['git tag -a v1.0.0 -m "Release v1.0.0"', 'Create an annotated release tag'], ['git push origin v1.0.0', 'Publish one tag']] }
     ];
+    const practice = {
+      branches: { goal: 'Start a new branch named feature/search and switch to it.', answers: ['git switch -c feature/search'], hint: 'Use switch with -c to create and check out a branch.' },
+      reflog: { goal: 'Inspect the local history of where HEAD and branch references have pointed.', answers: ['git reflog'], hint: 'The command is one word after git: reflog.' },
+      'merge-conflicts': { goal: 'Merge the branch feature/login into your current branch.', answers: ['git merge feature/login'], hint: 'Use merge followed by the branch name.' },
+      'rebase-conflicts': { goal: 'Replay your current branch commits on top of main.', answers: ['git rebase main'], hint: 'Use rebase followed by the base branch.' },
+      squash: { goal: 'Open an interactive rebase for the last four commits so you can combine them.', answers: ['git rebase -i head~4', 'git rebase -i HEAD~4'], hint: 'Interactive rebase uses -i and a revision such as HEAD~4.' },
+      stash: { goal: 'Save your current uncommitted work with the message "pause".', answers: ['git stash push -m "pause"', "git stash push -m 'pause'"], hint: 'Use stash push with -m and a message.' },
+      revert: { goal: 'Create a new commit that safely undoes commit abc123 on a shared branch.', answers: ['git revert abc123'], hint: 'Use revert, not reset, for a published commit.' },
+      'cherry-pick': { goal: 'Apply the single fix commit abc123 to your current branch.', answers: ['git cherry-pick abc123'], hint: 'Use cherry-pick followed by the commit ID.' },
+      bisect: { goal: 'Begin a binary-search debugging session.', answers: ['git bisect start'], hint: 'Start the session with bisect start.' },
+      worktrees: { goal: 'Create a checkout of branch hotfix in ../project-hotfix.', answers: ['git worktree add ../project-hotfix hotfix'], hint: 'Use worktree add, then the directory and branch.' },
+      tags: { goal: 'Create an annotated release tag v1.0.0 with the message "Release v1.0.0".', answers: ['git tag -a v1.0.0 -m "Release v1.0.0"', "git tag -a v1.0.0 -m 'Release v1.0.0'"], hint: 'Annotated tags use -a, the tag name, and -m.' }
+    };
     const $ = id => document.getElementById(id);
     const completed = new Set(JSON.parse(localStorage.getItem('gitwise-completed') || '[]'));
     let current = 0;
@@ -131,11 +166,14 @@
     function loadLesson(index) {
       current = Math.max(0, Math.min(lessons.length - 1, index)); const lesson = lessons[current];
       document.title = `Gitwise — ${lesson.title}`; $('breadcrumb').textContent = lesson.group; $('lessonNumber').textContent = `Lesson ${current + 1} / ${lessons.length}`; $('lessonTitle').textContent = lesson.title; $('intro').textContent = lesson.intro; $('whenToUse').textContent = lesson.when; $('notes').textContent = lesson.notes;
+      const challenge = practice[lesson.id]; $('practiceGoal').textContent = challenge.goal; $('practiceInput').value = ''; $('practiceFeedback').textContent = ''; $('practiceFeedback').className = 'practice-feedback'; $('practiceHint').textContent = 'Show hint'; $('practiceHint').dataset.hint = challenge.hint;
       $('commandExamples').replaceChildren(); lesson.examples.forEach(([command, description]) => { const card = document.createElement('div'); card.className = 'example'; const code = document.createElement('code'); code.textContent = command; const text = document.createElement('span'); text.textContent = description; card.append(code, text); $('commandExamples').append(card); });
       $('checklist').replaceChildren(); lesson.checklist.forEach(item => { const li = document.createElement('li'); li.textContent = item; $('checklist').append(li); });
       $('previousLesson').disabled = current === 0; $('nextLesson').disabled = current === lessons.length - 1; $('markComplete').textContent = completed.has(lesson.id) ? 'Completed ✓' : 'Mark lesson complete ✓'; renderSidebar(); window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     $('lessonSearch').addEventListener('input', renderSidebar); $('previousLesson').onclick = () => loadLesson(current - 1); $('nextLesson').onclick = () => loadLesson(current + 1); $('markComplete').onclick = () => { const id = lessons[current].id; completed.has(id) ? completed.delete(id) : completed.add(id); localStorage.setItem('gitwise-completed', JSON.stringify([...completed])); loadLesson(current); };
+    $('practiceForm').addEventListener('submit', event => { event.preventDefault(); const answer = $('practiceInput').value.trim().replace(/\\s+/g, ' '); const correct = practice[lessons[current].id].answers.some(item => item.toLowerCase() === answer.toLowerCase()); $('practiceFeedback').className = `practice-feedback ${correct ? 'success' : 'error'}`; $('practiceFeedback').textContent = correct ? 'Correct — nice work! Mark the lesson complete when you are ready.' : 'Not quite. Check the command structure and try again.'; });
+    $('practiceHint').addEventListener('click', () => { const button = $('practiceHint'); button.textContent = button.textContent === 'Show hint' ? button.dataset.hint : 'Show hint'; });
     $('menu').onclick = () => { const open = $('sidebar').classList.toggle('open'); $('menu').setAttribute('aria-expanded', open); };
     loadLesson(0);
   </script>
