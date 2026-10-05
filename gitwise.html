@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gitwise — When to Use Git</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #161a1e;
+      --panel: rgba(28, 33, 39, 0.92);
+      --line: #4a5664;
+      --text: #e8edf2;
+      --muted: #9baabd;
+      --accent: #83b9ff;
+      --code-bg: #0f1317;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(18, 22, 26, 0.88), rgba(18, 22, 26, 0.94)),
+        radial-gradient(circle at 15% 20%, #45515d 0, transparent 32%),
+        radial-gradient(circle at 85% 75%, #2b3640 0, transparent 34%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .gitwise-shell {
+      width: min(900px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+
+    .gitwise-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .back-link {
+      color: var(--accent);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    .topic-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .topic {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      border-bottom: 1px solid var(--line);
+      background: rgba(20, 24, 29, 0.34);
+    }
+
+    .topic-number {
+      padding: 22px 0 18px;
+      color: var(--muted);
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+
+    .topic summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 17px 0 14px;
+    }
+
+    .topic summary::-webkit-details-marker { display: none; }
+
+    .topic-title {
+      display: block;
+      color: var(--text);
+      font-size: 1.22rem;
+      font-weight: 650;
+    }
+
+    .topic-strap {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .topic summary::after {
+      content: "+";
+      float: right;
+      margin: -26px 20px 0 12px;
+      color: var(--accent);
+      font-size: 1.25rem;
+    }
+
+    .topic[open] summary::after { content: "−"; }
+
+    .topic-content {
+      grid-column: 2;
+      padding: 0 20px 20px 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .topic-content p { margin: 0 0 10px; }
+
+    .topic-content strong { color: var(--text); }
+
+    .topic-content code {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: var(--code-bg);
+      color: #d5e6ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.86em;
+    }
+
+    @media (max-width: 600px) {
+      .gitwise-shell { width: min(100% - 24px, 900px); padding-top: 28px; }
+      .gitwise-header { display: block; }
+      .back-link { display: inline-block; margin-top: 14px; }
+      .topic { grid-template-columns: 34px 1fr; }
+      .topic-number { font-size: 1.1rem; }
+      .topic-title { font-size: 1.05rem; }
+      .topic-strap { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="gitwise-shell">
+    <header class="gitwise-header">
+      <div>
+        <h1>Gitwise</h1>
+        <p class="subtitle">A practical guide to choosing the right Git tool for the situation. Click any topic to see when to use it and a few starting commands.</p>
+      </div>
+      <a class="back-link" href="index.html">← Back to Tin's site</a>
+    </header>
+
+    <section class="topic-list" aria-label="Git topics">
+      <details class="topic">
+        <div class="topic-number">1</div>
+        <summary><span class="topic-title">Branches</span><span class="topic-strap">Isolate a feature, experiment, or fix without disturbing the main branch</span></summary>
+        <div class="topic-content"><p>Use a branch whenever work may need review, may take more than one commit, or should be easy to abandon. Keep the main branch stable.</p><code>git switch -c feature-name</code><code>git switch main</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">2</div>
+        <summary><span class="topic-title">Reflog</span><span class="topic-strap">Recover lost commits and inspect where HEAD used to point</span></summary>
+        <div class="topic-content"><p>Use the reflog after a reset, rebase, deleted branch, or other mistake when a commit seems to have disappeared. It records local reference movement.</p><code>git reflog</code><code>git reset --hard &lt;commit&gt;</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">3</div>
+        <summary><span class="topic-title">Merge Conflicts</span><span class="topic-strap">Combine histories when both branches changed related lines</span></summary>
+        <div class="topic-content"><p>Use a merge when you want to preserve both branch histories and bring completed work into another branch. Resolve each conflict, test, then commit.</p><code>git merge feature-name</code><code>git add .</code><code>git commit</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">4</div>
+        <summary><span class="topic-title">Rebase Conflicts</span><span class="topic-strap">Replay your commits on a newer base while keeping history linear</span></summary>
+        <div class="topic-content"><p>Use rebase before sharing a branch when you want a clean, linear history. Do not rebase commits that other people are already building on without coordination.</p><code>git rebase main</code><code>git rebase --continue</code><code>git rebase --abort</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">5</div>
+        <summary><span class="topic-title">Squash</span><span class="topic-strap">Turn a noisy sequence of work-in-progress commits into a reviewable change</span></summary>
+        <div class="topic-content"><p>Squash before merging when intermediate commits are implementation notes, fixes to fixes, or unrelated clutter. Keep meaningful milestones when they help explain the history.</p><code>git rebase -i HEAD~N</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">6</div>
+        <summary><span class="topic-title">Stash</span><span class="topic-strap">Temporarily put aside uncommitted work when you need a clean tree</span></summary>
+        <div class="topic-content"><p>Use stash for short interruptions—such as switching branches to inspect a bug. For substantial work, a temporary branch is usually safer and easier to find later.</p><code>git stash push -m "work in progress"</code><code>git stash pop</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">7</div>
+        <summary><span class="topic-title">Revert</span><span class="topic-strap">Safely undo a published commit without rewriting shared history</span></summary>
+        <div class="topic-content"><p>Use revert on shared branches or after a commit has been pushed. It creates a new commit that reverses the earlier change.</p><code>git revert &lt;commit&gt;</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">8</div>
+        <summary><span class="topic-title">Cherry-pick</span><span class="topic-strap">Selectively move one or more commits from another branch</span></summary>
+        <div class="topic-content"><p>Use cherry-pick for a targeted bug fix, backport, or small change that should move without merging an entire branch. Check for conflicts and duplicate work.</p><code>git cherry-pick &lt;commit&gt;</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">9</div>
+        <summary><span class="topic-title">Bisect</span><span class="topic-strap">Find the commit that introduced a regression through binary search</span></summary>
+        <div class="topic-content"><p>Use bisect when you know a good revision and a bad revision but do not know which commit caused the problem. Mark each checked revision as good or bad.</p><code>git bisect start</code><code>git bisect good</code><code>git bisect bad</code><code>git bisect reset</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">10</div>
+        <summary><span class="topic-title">Worktrees</span><span class="topic-strap">Work on multiple branches at once in separate directories</span></summary>
+        <div class="topic-content"><p>Use worktrees when you need to keep a long-running feature open while reviewing a pull request, testing a hotfix, or running another branch locally.</p><code>git worktree add ../project-hotfix hotfix</code><code>git worktree list</code></div>
+      </details>
+
+      <details class="topic">
+        <div class="topic-number">11</div>
+        <summary><span class="topic-title">Tags</span><span class="topic-strap">Mark stable versions and release points so they can be found again</span></summary>
+        <div class="topic-content"><p>Use annotated tags for releases, published versions, and other durable milestones. Push tags deliberately when they should be visible to collaborators.</p><code>git tag -a v1.0.0 -m "Release v1.0.0"</code><code>git push origin v1.0.0</code></div>
+      </details>
+    </section>
+  </main>
+</body>
+</html>
