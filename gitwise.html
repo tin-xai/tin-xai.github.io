@@ -1,233 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gitwise — When to Use Git</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gitwise — Learn Git</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #161a1e;
-      --panel: rgba(28, 33, 39, 0.92);
-      --line: #4a5664;
+      --bg: #15191e;
+      --sidebar: #11151a;
+      --panel: #20262d;
+      --panel-soft: #1b2127;
+      --line: #46515e;
       --text: #e8edf2;
-      --muted: #9baabd;
+      --muted: #9caabd;
       --accent: #83b9ff;
-      --code-bg: #0f1317;
+      --green: #8bd5a7;
     }
-
     * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        linear-gradient(rgba(18, 22, 26, 0.88), rgba(18, 22, 26, 0.94)),
-        radial-gradient(circle at 15% 20%, #45515d 0, transparent 32%),
-        radial-gradient(circle at 85% 75%, #2b3640 0, transparent 34%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    .gitwise-shell {
-      width: min(900px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 42px 0 64px;
-    }
-
-    .gitwise-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 30px;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      letter-spacing: -0.04em;
-    }
-
-    .subtitle {
-      max-width: 650px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .back-link {
-      color: var(--accent);
-      font-size: 0.9rem;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-
-    .back-link:hover { text-decoration: underline; }
-
-    .topic-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .topic {
-      display: grid;
-      grid-template-columns: 46px 1fr;
-      border-bottom: 1px solid var(--line);
-      background: rgba(20, 24, 29, 0.34);
-    }
-
-    .topic-number {
-      padding: 22px 0 18px;
-      color: var(--muted);
-      font-size: 1.45rem;
-      font-weight: 700;
-    }
-
-    .topic summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 17px 0 14px;
-    }
-
-    .topic summary::-webkit-details-marker { display: none; }
-
-    .topic-title {
-      display: block;
-      color: var(--text);
-      font-size: 1.22rem;
-      font-weight: 650;
-    }
-
-    .topic-strap {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.5;
-    }
-
-    .topic summary::after {
-      content: "+";
-      float: right;
-      margin: -26px 20px 0 12px;
-      color: var(--accent);
-      font-size: 1.25rem;
-    }
-
-    .topic[open] summary::after { content: "−"; }
-
-    .topic-content {
-      grid-column: 2;
-      padding: 0 20px 20px 0;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .topic-content p { margin: 0 0 10px; }
-
-    .topic-content strong { color: var(--text); }
-
-    .topic-content code {
-      display: inline-block;
-      margin: 2px 4px 2px 0;
-      padding: 3px 7px;
-      border-radius: 5px;
-      background: var(--code-bg);
-      color: #d5e6ff;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.86em;
-    }
-
-    @media (max-width: 600px) {
-      .gitwise-shell { width: min(100% - 24px, 900px); padding-top: 28px; }
-      .gitwise-header { display: block; }
-      .back-link { display: inline-block; margin-top: 14px; }
-      .topic { grid-template-columns: 34px 1fr; }
-      .topic-number { font-size: 1.1rem; }
-      .topic-title { font-size: 1.05rem; }
-      .topic-strap { font-size: 0.9rem; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 65% 20%, #29323b 0, transparent 38%), var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    button, input { font: inherit; }
+    .app { min-height: 100vh; display: grid; grid-template-columns: 290px minmax(0, 1fr); }
+    .sidebar { display: flex; flex-direction: column; min-height: 100vh; padding: 28px 20px 20px; background: rgba(17, 21, 26, .96); border-right: 1px solid #303943; }
+    .logo { color: var(--text); text-decoration: none; font-size: 1.55rem; font-weight: 750; letter-spacing: -.04em; }
+    .logo span { color: var(--accent); }
+    .sidebar-caption { margin: 8px 0 23px; color: var(--muted); font-size: .9rem; }
+    .search-label { margin-bottom: 7px; color: var(--muted); font-size: .75rem; }
+    #lessonSearch { width: 100%; padding: 10px 12px; border: 1px solid #3d4854; border-radius: 6px; outline: none; background: #1a2026; color: var(--text); }
+    #lessonSearch:focus { border-color: var(--accent); }
+    #courseList { overflow: auto; margin: 18px -8px 0; padding: 0 8px; }
+    .course-label { margin: 18px 0 7px; color: var(--muted); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .lesson { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 10px 11px; border: 0; border-left: 2px solid transparent; border-radius: 5px; background: transparent; color: var(--muted); cursor: pointer; text-align: left; }
+    .lesson:hover, .lesson.active { border-left-color: var(--accent); background: #20272f; color: var(--text); }
+    .lesson.completed::after { content: "✓"; color: var(--green); }
+    .lesson .keys { max-width: 82px; overflow: hidden; color: #718096; font-family: ui-monospace, monospace; font-size: .7rem; text-overflow: ellipsis; white-space: nowrap; }
+    .sidebar-footer { margin-top: auto; padding-top: 20px; color: var(--muted); font-size: .78rem; }
+    progress { display: block; width: 100%; height: 6px; margin: 9px 0 7px; accent-color: var(--accent); }
+    .sidebar-footer small { color: #718096; }
+    main { min-width: 0; }
+    .topbar { display: flex; align-items: center; gap: 15px; height: 62px; padding: 0 42px; border-bottom: 1px solid #303943; color: var(--muted); }
+    #menu { display: none; border: 1px solid #46515e; border-radius: 5px; background: transparent; color: var(--text); padding: 7px 10px; }
+    .free-label { margin-left: auto; color: var(--green); font-size: .8rem; }
+    .lesson-content { width: min(880px, calc(100% - 84px)); margin: 0 auto; padding: 52px 0 72px; }
+    .eyebrow { display: block; margin-bottom: 10px; color: var(--accent); font-size: .76rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); letter-spacing: -.045em; }
+    .intro { max-width: 760px; margin: 14px 0 28px; color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
+    .command-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 28px; }
+    .example { padding: 14px 16px; border: 1px solid #3c4854; border-radius: 6px; background: var(--panel); }
+    .example code, .quick-command { color: #d4e6ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .example code { display: block; margin-bottom: 6px; font-size: .9rem; }
+    .example span { color: var(--muted); font-size: .82rem; line-height: 1.45; }
+    .lesson-section { margin-top: 28px; padding: 23px 25px; border: 1px solid #3d4854; border-radius: 7px; background: rgba(32, 38, 45, .78); }
+    .lesson-section h2 { margin: 0 0 12px; font-size: 1.1rem; }
+    .lesson-section p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .checklist { margin: 14px 0 0; padding-left: 21px; color: var(--muted); line-height: 1.8; }
+    .checklist strong { color: var(--text); }
+    .notes { margin-top: 28px; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .notes h2 { margin: 0 0 8px; font-size: 1.02rem; }
+    .notes p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .lesson-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 26px; }
+    .lesson-actions button { padding: 9px 13px; border: 1px solid #4b5866; border-radius: 5px; background: var(--panel); color: var(--text); cursor: pointer; }
+    .lesson-actions button:hover { border-color: var(--accent); color: var(--accent); }
+    .lesson-actions .complete { border-color: #4d8966; color: var(--green); }
+    .mobile-back { display: none; color: var(--accent); text-decoration: none; }
+    @media (max-width: 800px) {
+      .app { display: block; }
+      .sidebar { position: fixed; z-index: 10; top: 0; bottom: 0; left: 0; width: min(290px, 86vw); transform: translateX(-100%); transition: transform .2s ease; }
+      .sidebar.open { transform: translateX(0); }
+      .topbar { padding: 0 18px; }
+      #menu { display: block; }
+      .lesson-content { width: min(100% - 36px, 880px); padding-top: 36px; }
+      .mobile-back { display: inline-block; margin-bottom: 22px; }
     }
   </style>
 </head>
 <body>
-  <main class="gitwise-shell">
-    <header class="gitwise-header">
-      <div>
-        <h1>Gitwise</h1>
-        <p class="subtitle">A practical guide to choosing the right Git tool for the situation. Click any topic to see when to use it and a few starting commands.</p>
-      </div>
-      <a class="back-link" href="index.html">← Back to Tin's site</a>
-    </header>
-
-    <section class="topic-list" aria-label="Git topics">
-      <details class="topic">
-        <div class="topic-number">1</div>
-        <summary><span class="topic-title">Branches</span><span class="topic-strap">Isolate a feature, experiment, or fix without disturbing the main branch</span></summary>
-        <div class="topic-content"><p>Use a branch whenever work may need review, may take more than one commit, or should be easy to abandon. Keep the main branch stable.</p><code>git switch -c feature-name</code><code>git switch main</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">2</div>
-        <summary><span class="topic-title">Reflog</span><span class="topic-strap">Recover lost commits and inspect where HEAD used to point</span></summary>
-        <div class="topic-content"><p>Use the reflog after a reset, rebase, deleted branch, or other mistake when a commit seems to have disappeared. It records local reference movement.</p><code>git reflog</code><code>git reset --hard &lt;commit&gt;</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">3</div>
-        <summary><span class="topic-title">Merge Conflicts</span><span class="topic-strap">Combine histories when both branches changed related lines</span></summary>
-        <div class="topic-content"><p>Use a merge when you want to preserve both branch histories and bring completed work into another branch. Resolve each conflict, test, then commit.</p><code>git merge feature-name</code><code>git add .</code><code>git commit</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">4</div>
-        <summary><span class="topic-title">Rebase Conflicts</span><span class="topic-strap">Replay your commits on a newer base while keeping history linear</span></summary>
-        <div class="topic-content"><p>Use rebase before sharing a branch when you want a clean, linear history. Do not rebase commits that other people are already building on without coordination.</p><code>git rebase main</code><code>git rebase --continue</code><code>git rebase --abort</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">5</div>
-        <summary><span class="topic-title">Squash</span><span class="topic-strap">Turn a noisy sequence of work-in-progress commits into a reviewable change</span></summary>
-        <div class="topic-content"><p>Squash before merging when intermediate commits are implementation notes, fixes to fixes, or unrelated clutter. Keep meaningful milestones when they help explain the history.</p><code>git rebase -i HEAD~N</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">6</div>
-        <summary><span class="topic-title">Stash</span><span class="topic-strap">Temporarily put aside uncommitted work when you need a clean tree</span></summary>
-        <div class="topic-content"><p>Use stash for short interruptions—such as switching branches to inspect a bug. For substantial work, a temporary branch is usually safer and easier to find later.</p><code>git stash push -m "work in progress"</code><code>git stash pop</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">7</div>
-        <summary><span class="topic-title">Revert</span><span class="topic-strap">Safely undo a published commit without rewriting shared history</span></summary>
-        <div class="topic-content"><p>Use revert on shared branches or after a commit has been pushed. It creates a new commit that reverses the earlier change.</p><code>git revert &lt;commit&gt;</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">8</div>
-        <summary><span class="topic-title">Cherry-pick</span><span class="topic-strap">Selectively move one or more commits from another branch</span></summary>
-        <div class="topic-content"><p>Use cherry-pick for a targeted bug fix, backport, or small change that should move without merging an entire branch. Check for conflicts and duplicate work.</p><code>git cherry-pick &lt;commit&gt;</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">9</div>
-        <summary><span class="topic-title">Bisect</span><span class="topic-strap">Find the commit that introduced a regression through binary search</span></summary>
-        <div class="topic-content"><p>Use bisect when you know a good revision and a bad revision but do not know which commit caused the problem. Mark each checked revision as good or bad.</p><code>git bisect start</code><code>git bisect good</code><code>git bisect bad</code><code>git bisect reset</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">10</div>
-        <summary><span class="topic-title">Worktrees</span><span class="topic-strap">Work on multiple branches at once in separate directories</span></summary>
-        <div class="topic-content"><p>Use worktrees when you need to keep a long-running feature open while reviewing a pull request, testing a hotfix, or running another branch locally.</p><code>git worktree add ../project-hotfix hotfix</code><code>git worktree list</code></div>
-      </details>
-
-      <details class="topic">
-        <div class="topic-number">11</div>
-        <summary><span class="topic-title">Tags</span><span class="topic-strap">Mark stable versions and release points so they can be found again</span></summary>
-        <div class="topic-content"><p>Use annotated tags for releases, published versions, and other durable milestones. Push tags deliberately when they should be visible to collaborators.</p><code>git tag -a v1.0.0 -m "Release v1.0.0"</code><code>git push origin v1.0.0</code></div>
-      </details>
-    </section>
-  </main>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <a class="logo" href="index.html"><span>⌁</span> gitwise</a>
+      <p class="sidebar-caption">Your practical Git practice room</p>
+      <label class="search-label" for="lessonSearch">Find a lesson or command</label>
+      <input id="lessonSearch" type="search" placeholder="Search lessons…">
+      <nav id="courseList" aria-label="Git lessons"></nav>
+      <footer class="sidebar-footer"><strong id="progressText">0 / 11 lessons completed</strong><progress id="progress" value="0" max="11"></progress><small>Progress saved in this browser</small></footer>
+    </aside>
+    <main>
+      <header class="topbar"><button id="menu" aria-controls="sidebar" aria-expanded="false">☰ Lessons</button><span id="breadcrumb"></span><span class="free-label">All lessons unlocked</span></header>
+      <section class="lesson-content">
+        <a class="mobile-back" href="index.html">← Back to Tin's site</a>
+        <span id="lessonNumber" class="eyebrow"></span>
+        <h1 id="lessonTitle"></h1>
+        <p class="intro" id="intro"></p>
+        <div class="command-examples" id="commandExamples"></div>
+        <section class="lesson-section"><h2>When to use it</h2><p id="whenToUse"></p><ul class="checklist" id="checklist"></ul></section>
+        <section class="notes"><h2>Practical note</h2><p id="notes"></p></section>
+        <div class="lesson-actions"><button id="previousLesson">← Previous lesson</button><button class="complete" id="markComplete">Mark lesson complete ✓</button><button id="nextLesson">Next lesson →</button></div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const lessons = [
+      { id: 'branches', group: '01 · Core workflow', title: 'Branches', intro: 'Isolate a feature, experiment, or fix without disturbing the main branch.', when: 'Use a branch whenever work may need review, may take more than one commit, or should be easy to abandon. Keep the main branch stable.', checklist: ['Create a branch for each focused change.', 'Name it after the work: feature/search, fix/login, or experiment/new-model.', 'Delete merged branches so the repository stays easy to navigate.'], notes: 'A branch is a movable label pointing to a commit, not a separate copy of the repository.', examples: [['git switch -c feature-name', 'Create and switch to a new branch'], ['git switch main', 'Return to the main branch']] },
+      { id: 'reflog', group: '02 · Recovery', title: 'Reflog', intro: 'Recover lost commits and inspect where HEAD used to point.', when: 'Use the reflog after a reset, rebase, deleted branch, or other mistake when a commit seems to have disappeared. It records local reference movement.', checklist: ['Run it before assuming work is lost.', 'Find the previous HEAD entry and verify it with git show.', 'Create a rescue branch before changing anything else.'], notes: 'The reflog is local and eventually expires, so use it soon after an accidental destructive operation.', examples: [['git reflog', 'Inspect recent reference movements'], ['git branch rescue HEAD@{3}', 'Save a recovered commit']] },
+      { id: 'merge-conflicts', group: '03 · Integrating work', title: 'Merge Conflicts', intro: 'Combine histories when both branches changed related lines.', when: 'Use a merge when you want to preserve both branch histories and bring completed work into another branch.', checklist: ['Read each conflict marker and understand both sides.', 'Edit the file into the desired final version.', 'Test the result before committing the merge.'], notes: 'Do not resolve conflicts mechanically. The correct answer depends on the intended behavior of the combined change.', examples: [['git merge feature-name', 'Merge a branch into the current branch'], ['git add .', 'Mark conflicts as resolved'], ['git commit', 'Finish the merge']] },
+      { id: 'rebase-conflicts', group: '03 · Integrating work', title: 'Rebase Conflicts', intro: 'Replay your commits on a newer base while keeping history linear.', when: 'Use rebase before sharing a branch when you want a clean, linear history. Avoid rebasing commits that other people are already building on.', checklist: ['Update your base branch first.', 'Resolve one commit at a time and continue.', 'Abort if the resulting history or conflict resolution is unclear.'], notes: 'Rebase rewrites commit IDs. It is excellent for private branches and risky for shared ones.', examples: [['git rebase main', 'Replay current commits on main'], ['git rebase --continue', 'Continue after resolving a conflict'], ['git rebase --abort', 'Return to the pre-rebase state']] },
+      { id: 'squash', group: '04 · Shaping history', title: 'Squash', intro: 'Turn a noisy sequence of work-in-progress commits into a reviewable change.', when: 'Squash before merging when intermediate commits are implementation notes, fixes to fixes, or unrelated clutter.', checklist: ['Keep commits separate when each is a meaningful milestone.', 'Use an interactive rebase to combine only the commits that belong together.', 'Write a final commit message that explains the change.'], notes: 'A clean history helps future readers understand why a change exists, but do not erase useful context just for appearances.', examples: [['git rebase -i HEAD~N', 'Interactively combine recent commits']] },
+      { id: 'stash', group: '05 · Temporary work', title: 'Stash', intro: 'Temporarily put aside uncommitted work when you need a clean tree.', when: 'Use stash for short interruptions, such as switching branches to inspect a bug. For substantial work, a temporary branch is usually safer.', checklist: ['Add a message so the stash has context.', 'List stashes before applying an old one.', 'Drop stale stashes after confirming the work is safe.'], notes: 'Stash is a temporary shelf, not a long-term storage system. A branch is easier to find and share.', examples: [['git stash push -m "work in progress"', 'Save current changes'], ['git stash list', 'List saved stashes'], ['git stash pop', 'Apply and remove the latest stash']] },
+      { id: 'revert', group: '06 · Undoing changes', title: 'Revert', intro: 'Safely undo a published commit without rewriting shared history.', when: 'Use revert on shared branches or after a commit has been pushed. It creates a new commit that reverses the earlier change.', checklist: ['Prefer revert over reset for public history.', 'Review the inverse change before pushing.', 'Revert the revert if you later need to restore the original change.'], notes: 'Revert is explicit and collaborative: everyone sees both the original change and the decision to undo it.', examples: [['git revert <commit>', 'Create an inverse commit']] },
+      { id: 'cherry-pick', group: '06 · Undoing changes', title: 'Cherry-pick', intro: 'Selectively move one or more commits from another branch.', when: 'Use cherry-pick for a targeted bug fix, backport, or small change that should move without merging an entire branch.', checklist: ['Choose self-contained commits with clear messages.', 'Check whether the commit depends on earlier changes.', 'Avoid creating duplicate implementations across long-lived branches.'], notes: 'Cherry-pick is precise, but it duplicates history. Use a merge when you actually want the branches connected.', examples: [['git cherry-pick <commit>', 'Apply one commit here']] },
+      { id: 'bisect', group: '07 · Finding bugs', title: 'Bisect', intro: 'Find the commit that introduced a regression through binary search.', when: 'Use bisect when you know a good revision and a bad revision but do not know which commit caused the problem.', checklist: ['Have a reliable test or manual check for good and bad.', 'Mark every checked revision accurately.', 'Reset bisect mode when the culprit is found.'], notes: 'Bisect can reduce a search through hundreds of commits to a handful of tests.', examples: [['git bisect start', 'Begin a bisect session'], ['git bisect good', 'Mark the current revision good'], ['git bisect bad', 'Mark the current revision bad'], ['git bisect reset', 'Leave bisect mode']] },
+      { id: 'worktrees', group: '08 · Parallel work', title: 'Worktrees', intro: 'Work on multiple branches at once in separate directories.', when: 'Use worktrees when you need to keep a long-running feature open while reviewing a pull request, testing a hotfix, or running another branch locally.', checklist: ['Give each worktree a descriptive sibling directory.', 'Use one branch per worktree.', 'Remove unused worktrees when the task is finished.'], notes: 'Worktrees avoid repeated stashing and checkout churn while sharing the same Git object database.', examples: [['git worktree add ../project-hotfix hotfix', 'Create a second checkout'], ['git worktree list', 'See active worktrees'], ['git worktree remove ../project-hotfix', 'Remove a worktree']] },
+      { id: 'tags', group: '09 · Releases', title: 'Tags', intro: 'Mark stable versions and release points so they can be found again.', when: 'Use annotated tags for releases, published versions, and other durable milestones.', checklist: ['Tag the exact commit that was tested and released.', 'Use a consistent version naming scheme.', 'Push tags deliberately when they should be visible to collaborators.'], notes: 'Unlike branches, release tags should not move. Create a new tag for a new release.', examples: [['git tag -a v1.0.0 -m "Release v1.0.0"', 'Create an annotated release tag'], ['git push origin v1.0.0', 'Publish one tag']] }
+    ];
+    const $ = id => document.getElementById(id);
+    const completed = new Set(JSON.parse(localStorage.getItem('gitwise-completed') || '[]'));
+    let current = 0;
+    function renderSidebar() {
+      const query = $('lessonSearch').value.trim().toLowerCase();
+      $('courseList').replaceChildren();
+      let group = '';
+      lessons.forEach((lesson, index) => {
+        if (query && !`${lesson.title} ${lesson.group} ${lesson.intro} ${lesson.examples.flat().join(' ')}`.toLowerCase().includes(query)) return;
+        if (lesson.group !== group) { const heading = document.createElement('h2'); heading.className = 'course-label'; heading.textContent = lesson.group; $('courseList').append(heading); group = lesson.group; }
+        const button = document.createElement('button'); button.className = `lesson${index === current ? ' active' : ''}${completed.has(lesson.id) ? ' completed' : ''}`; button.setAttribute('aria-current', index === current ? 'page' : 'false');
+        const title = document.createElement('span'); title.textContent = lesson.title; const keys = document.createElement('span'); keys.className = 'keys'; keys.textContent = lesson.examples.map(example => example[0]).join(' ').slice(0, 17); button.append(title, keys); button.onclick = () => loadLesson(index); $('courseList').append(button);
+      });
+      if (!$('courseList').children.length) { const empty = document.createElement('p'); empty.textContent = 'No matching lessons.'; empty.style.color = 'var(--muted)'; $('courseList').append(empty); }
+      $('progressText').textContent = `${completed.size} / ${lessons.length} lessons completed`; $('progress').value = completed.size;
+    }
+    function loadLesson(index) {
+      current = Math.max(0, Math.min(lessons.length - 1, index)); const lesson = lessons[current];
+      document.title = `Gitwise — ${lesson.title}`; $('breadcrumb').textContent = lesson.group; $('lessonNumber').textContent = `Lesson ${current + 1} / ${lessons.length}`; $('lessonTitle').textContent = lesson.title; $('intro').textContent = lesson.intro; $('whenToUse').textContent = lesson.when; $('notes').textContent = lesson.notes;
+      $('commandExamples').replaceChildren(); lesson.examples.forEach(([command, description]) => { const card = document.createElement('div'); card.className = 'example'; const code = document.createElement('code'); code.textContent = command; const text = document.createElement('span'); text.textContent = description; card.append(code, text); $('commandExamples').append(card); });
+      $('checklist').replaceChildren(); lesson.checklist.forEach(item => { const li = document.createElement('li'); li.textContent = item; $('checklist').append(li); });
+      $('previousLesson').disabled = current === 0; $('nextLesson').disabled = current === lessons.length - 1; $('markComplete').textContent = completed.has(lesson.id) ? 'Completed ✓' : 'Mark lesson complete ✓'; renderSidebar(); window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    $('lessonSearch').addEventListener('input', renderSidebar); $('previousLesson').onclick = () => loadLesson(current - 1); $('nextLesson').onclick = () => loadLesson(current + 1); $('markComplete').onclick = () => { const id = lessons[current].id; completed.has(id) ? completed.delete(id) : completed.add(id); localStorage.setItem('gitwise-completed', JSON.stringify([...completed])); loadLesson(current); };
+    $('menu').onclick = () => { const open = $('sidebar').classList.toggle('open'); $('menu').setAttribute('aria-expanded', open); };
+    loadLesson(0);
+  </script>
 </body>
 </html>
